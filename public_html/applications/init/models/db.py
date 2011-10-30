@@ -39,13 +39,6 @@ crud, service, plugins = Crud(db), Service(), PluginManager()
 ## create all tables needed by auth if not custom tables
 auth.define_tables() 
 
-auth.setting.extra_fields['auth_user']= [
-  Field('address'),
-  Field('city'),
-  Field('zip'),
-  Field('phone')]
-
-
 ## configure email
 mail=auth.settings.mailer
 mail.settings.server = 'logging' or 'smtp.gmail.com:587'
