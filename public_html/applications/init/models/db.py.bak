@@ -36,15 +36,17 @@ from gluon.tools import Auth, Crud, Service, PluginManager, prettydate
 auth = Auth(db, hmac_key=Auth.get_or_create_key()) 
 crud, service, plugins = Crud(db), Service(), PluginManager()
 
+## add additional fields for user profile
+auth.settings.extra_fields['auth_user']= [
+    Field('gender', requires=IS_IN_SET(['Male', 'Female'])),
+    Field('age', requires=IS_INT_IN_RANGE(1, 100, error_message='age needs to be between 1 and 100')),
+    Field('height' requires=IS_INT_IN_RANGE(48, 84, error_message='height needs to be between 48 in. and 84 in.')),
+    Field('current_weight')]
+
 ## create all tables needed by auth if not custom tables
 auth.define_tables() 
 
-auth.setting.extra_fields['auth_user']= [
-  Field('address'),
-  Field('city'),
-  Field('zip'),
-  Field('phone')]
-
+##db.auth_user.gender.requires = IS_IN_SET(['male', 'female'])
 
 ## configure email
 mail=auth.settings.mailer

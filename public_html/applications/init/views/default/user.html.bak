@@ -3,7 +3,8 @@
 <div id="web2py_user_form">
 
 {{if request.args(0)=='register':}}
-    {{=form}}
+    User Name = {{db.auth_user.email}}
+
     
 {{pass}}
 
