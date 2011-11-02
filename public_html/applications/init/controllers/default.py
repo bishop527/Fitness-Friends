@@ -10,11 +10,14 @@
 #########################################################################
 
 def index():
-    """
-    example action using the internationalization operator T and flash
-    rendered by views/default/index.html or views/generic.html
-    """
-    return dict(form=auth())
+
+    ## if user is already logged in, redirect to the user home page.
+    if auth.user:
+        redirect(URL(r=request, f='home'))  
+    
+    form = auth()
+    
+    return dict(form=form)
 
 def user():
     """
@@ -30,8 +33,16 @@ def user():
         @auth.requires_permission('read','table name',record_id)
     to decorate functions that need access control
     """
-    return dict(form=auth())
+    
+    form = auth()
+    
+    return dict(form=form)
 
+## Users home page.
+@auth.requires_login()
+def home():
+    
+    return dict()
 
 def download():
     """

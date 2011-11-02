@@ -1,5 +1,5 @@
 {{extend 'layout.html'}}
-
+	
 <table width="100%" border=0>
 <tbody>
 <tr>
@@ -11,17 +11,8 @@
     <img src="{{=URL('static','images/FitnessChallenge.png')}}" height="200"/>
 </td>
 <td width="50%">
-    <center><h3>{{=T( request.args(0).replace('_',' ').capitalize() )}}</h3></center>
-    {{=form}}
-    {{if request.args(0)=='login':}}
-    {{if not 'register' in auth.settings.actions_disabled:}}
-    <center><br/><a href="{{=URL(r=request,args='../user/register')}}">register</a>
-    &nbsp&nbsp&nbsp&nbsp&nbsp
-    {{pass}}
-    {{if not 'request_reset_password' in auth.settings.actions_disabled:}}
-    <a href="{{=URL(r=request,args='request_reset_password')}}">    lost password</a></center>
-    {{pass}}
-    {{pass}}
+	<center><h2>Login</h2></center>
+	{{=auth.login()}}
 </td>
 </tr>
 </tbody>

@@ -59,3 +59,7 @@ timestamp: 2011-10-30T17:33:04.047000
 ALTER TABLE auth_user ADD height CHAR(512);
 timestamp: 2011-10-30T17:33:04.069000
 ALTER TABLE auth_user ADD current_weight CHAR(512);
+timestamp: 2011-11-01T19:45:01.363000
+ALTER TABLE auth_user ADD registration_id CHAR(512);
+timestamp: 2011-11-01T21:35:53.506000
+ALTER TABLE auth_user ADD birthday DATE;

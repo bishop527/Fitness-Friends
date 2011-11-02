@@ -38,8 +38,8 @@ crud, service, plugins = Crud(db), Service(), PluginManager()
 
 ## add additional fields for user profile
 auth.settings.extra_fields['auth_user']= [
-    Field('gender', requires=IS_IN_SET(['Male', 'Female'])),
-    Field('age', requires=IS_INT_IN_RANGE(1, 100, error_message='age needs to be between 1 and 100')),
+    Field('gender', requires=IS_IN_SET(['Male', 'Female']), widget=SQLFORM.widgets.radio.widget),
+    Field('birthday', 'date'),
     Field('height', requires=IS_INT_IN_RANGE(48, 84, error_message='height needs to be between 48 in. and 84 in.')),
     Field('current_weight')]
 

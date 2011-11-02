@@ -1,0 +1,4 @@
+{{extend 'layout.html'}}
+<h1>This is the Users Home Page</h1>
+<h2> Welcome {{=auth.user.first_name}}</h2>
+{{=BEAUTIFY(response._vars)}}

@@ -3,11 +3,28 @@
 <div id="web2py_user_form">
 
 {{if request.args(0)=='register':}}
-    {{=form}}
-    
+	{{=form.custom.begin}}
+	<strong>First Name: {{=form.custom.widget.first_name}}</strong>
+	<strong>Last Name: {{=form.custom.widget.last_name}}</strong>
+	<p><p>
+	<strong>E-Mail: {{=form.custom.widget.email}}</strong>
+	<p>
+	<strong>Password: {{=form.custom.widget.password}}</strong>
+	<strong>Verify Password: {{=form.custom.widget.password_two}}</strong>
+	<p>
+	{{=form.custom.widget.gender}} 
+	<p><p>
+	<strong>Birthday: {{=form.custom.widget.birthday}}</strong>
+	<p>
+	<strong>Height (inches): {{=form.custom.widget.height}}</strong>
+	<strong>Current Weight (lbs): {{=form.custom.widget.current_weight}}</strong>
+	<p>
+	{{=form.custom.submit}}
+	{{=form.custom.end}} 
 {{pass}}
 
 {{if request.args(0)=='login':}}
+{{=form}}
 {{if not 'register' in auth.settings.actions_disabled:}}
 <br/><a href="{{=URL(r=request,args='register')}}">register</a>
 {{pass}}
