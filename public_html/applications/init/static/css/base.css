@@ -328,7 +328,7 @@ blockquote {
 
 input[type=text], input[type=password], textarea, select {
     margin: 2px 15px 2px 5px;
-    width: 200px;
+    width: 280px;
     background: #fff;
     color: #555;
     border: 1px solid #dedede;
@@ -644,7 +644,8 @@ a.buttontext span.icon{ margin:auto;}
 .web2py_console {
     background-color: #f2f2f2; padding: 5px; border-bottom: 1px solid #DDD; 
     min-height: 60px;
-    text-align:center;
+    text-align: center;
+    position: relative;
 }
 
 
@@ -735,3 +736,16 @@ a.button:hover {
 .web2py_paginator ul li.current a {
     font-weight: bold !important;
 }
+#w2p_query_panel {
+        float:left;
+	background:#e0e0e0;
+        border:1px solid #CFCFCF;
+	bottom:3px;
+        left:187px;
+        min-width:550px;
+	min-height:16px;
+        padding: 3px;
+	border-radius:2px;
+}
+.ie9 #query_panel {padding-bottom:2px;}
+

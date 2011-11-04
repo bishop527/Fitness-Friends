@@ -1,0 +1,17 @@
+{{extend 'template.html'}}
+
+<h1> contact form </h1>
+<!--
+<form action="#" method="post">
+    <label for="name">Name: </label> <input class="contactInputText" type="text" id="name" /><br />
+    <div style="clear:left"></div>
+    <label for="subject">Subject: </label> <input class="contactInputText" type="text" id="subject" /><br />
+    <div style="clear:left"></div>
+    <label for="email">Email: </label> <input class="contactInputText" type="text" id="email" /><br />
+    <div style="clear:left"></div>
+    <label for="message">Message: </label> <textarea class="contactTextArea" id="message" rows="8" cols="40"></textarea><br />
+    <div style="clear:left"></div>
+    
+    <input type="submit" class="button" value="Submit" />
+</form>
+-->

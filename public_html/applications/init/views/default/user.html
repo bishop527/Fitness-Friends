@@ -1,37 +1,45 @@
-{{extend 'layout.html'}}
-<h2>{{=T( request.args(0).replace('_',' ').capitalize() )}}</h2>
+{{extend 'template.html'}}
 <div id="web2py_user_form">
 
 {{if request.args(0)=='register':}}
-	{{=form.custom.begin}}
-	<strong>First Name: {{=form.custom.widget.first_name}}</strong>
-	<strong>Last Name: {{=form.custom.widget.last_name}}</strong>
-	<p><p>
-	<strong>E-Mail: {{=form.custom.widget.email}}</strong>
-	<p>
-	<strong>Password: {{=form.custom.widget.password}}</strong>
-	<strong>Verify Password: {{=form.custom.widget.password_two}}</strong>
-	<p>
-	{{=form.custom.widget.gender}} 
-	<p><p>
-	<strong>Birthday: {{=form.custom.widget.birthday}}</strong>
-	<p>
-	<strong>Height (inches): {{=form.custom.widget.height}}</strong>
-	<strong>Current Weight (lbs): {{=form.custom.widget.current_weight}}</strong>
-	<p>
-	{{=form.custom.submit}}
-	{{=form.custom.end}} 
+    {{=form.custom.begin}}
+    <h3>First Name: {{=form.custom.widget.first_name}} Last Name: {{=form.custom.widget.last_name}}</h3>
+    <p><p>
+    <h3>E-Mail: {{=form.custom.widget.email}}</h3>
+    <p>
+    <h3>Password: {{=form.custom.widget.password}}</h3>
+    <h3>Verify Password: {{=form.custom.widget.password_two}}</h3>
+    <p>
+    <h3>Gender</h3>
+    {{=form.custom.widget.gender}} 
+    <p><p>
+    <h3>Birthday: {{=form.custom.widget.birthday}}</h3>
+    <p>
+    <h3>Height (inches): {{=form.custom.widget.height}} Current Weight (lbs): {{=form.custom.widget.current_weight}}</h3>
+    <br/>
+    
+    {{=form.custom.submit}}
+    {{=form.custom.end}} 
 {{pass}}
 
 {{if request.args(0)=='login':}}
-{{=form}}
-{{if not 'register' in auth.settings.actions_disabled:}}
-<br/><a href="{{=URL(r=request,args='register')}}">register</a>
+    {{=form.custom.begin}}
+    <p>
+    <center> <h3>E-Mail: {{=form.custom.widget.email}}</h3>
+    <p>
+    <h3>Password: {{=form.custom.widget.password}}</h3>
+    <p>
+    {{=form.custom.submit}}
+    {{=form.custom.end}} 
+    {{if not 'register' in auth.settings.actions_disabled:}}
+    <br/><h3><a href="{{=URL(r=request,args='register')}}">register for free </a>
+    {{pass}}
+    {{if not 'request_reset_password' in auth.settings.actions_disabled:}}
+    <p><a href="{{=URL(r=request,args='request_reset_password')}}">  lost password</a></h3>
+    {{pass}}
+    {{pass}}
 {{pass}}
-{{if not 'request_reset_password' in auth.settings.actions_disabled:}}
-<br/><a href="{{=URL(r=request,args='request_reset_password')}}">lost password</a>
-{{pass}}
-{{pass}}
+
 </div>
 
 <script language="javascript">

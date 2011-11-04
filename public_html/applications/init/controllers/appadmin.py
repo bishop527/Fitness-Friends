@@ -33,7 +33,8 @@ elif (remote_addr not in hosts) and (remote_addr != "127.0.0.1"):
 
 if (request.application=='admin' and not session.authorized) or \
         (request.application!='admin' and not gluon.fileutils.check_credentials(request)):
-    redirect(URL('admin', 'default', 'index'))
+    redirect(URL('admin', 'default', 'index',
+                 vars=dict(send=URL(args=request.args,vars=request.vars))))
 
 ignore_rw = True
 response.view = 'appadmin.html'

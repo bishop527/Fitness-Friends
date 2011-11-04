@@ -1,0 +1,394 @@
+* {
+    margin:0;
+    padding:0;
+    font-family:Tahoma,Verdana,monospace,sans-serif;
+}
+
+body {
+    background:url('../images/body-bg.jpg') repeat-x #203d4e;
+}
+
+a img {
+    border:0;
+}
+
+input.button {
+    border:1px solid #303d3d;
+    padding:5px;
+    margin-top:5px;
+}
+
+input.button:hover {
+    color:white;
+    background-color:#77838c;
+}
+
+/*************************************************
+ * HEADER STYLES                                 *
+ *************************************************/
+div#header {
+    height:285px;
+    width:980px;
+    margin:0 auto;
+    background:url('../images/new_header.jpg') no-repeat;
+}
+
+div#header div#mainTitle {
+    margin-left:325px;
+    padding-top:60px;
+}
+
+div#header div#mainTitle h1 {
+    font-size:42px;
+    color:#303d3d;
+    letter-spacing:5px;
+    font-weight:normal;
+}
+
+div#header div#mainTitle h2 {
+    font-size:35px;
+    color:#303d3d;
+    letter-spacing:5px;
+    font-weight:normal;
+}
+
+div#header div#mainTitle h3 {
+    margin-top:18px;
+    font-size:18px;
+    color:#718888;
+    letter-spacing:3px;
+    font-weight:normal;
+}
+
+div#header div#headMenu {
+    float:right;
+    width:240px;
+    height:160px;
+    margin-right:22px;
+}
+
+div#header div#headMenu ul {
+    font-size:18px;
+    color:#303d3d;
+    list-style:none;
+    font-weight:normal;
+}
+
+div#header div#headMenu ul li a {
+    display:block;
+    float:left;
+    width:80px;
+    height:160px;
+    text-align:center;
+    color:#303d3d;
+    text-decoration:none;
+}
+
+div#header div#headMenu ul li a:hover {
+    background-color: yellow;
+    text-decoration:underline;
+}
+
+div#header div#headMenu ul li a span.verticalAlign {
+    display:block;
+    margin-top:130px;
+}
+
+div#header div#headMenu ul li a.headMenuHome:hover { background:url("../images/headmenu-bg.jpg") no-repeat left bottom; }
+div#header div#headMenu ul li a.headMenuHomeSelected { background:url("../images/headmenu-bg.jpg") no-repeat left top; }
+div#header div#headMenu ul li a.headMenuArticles:hover { background:url("../images/headmenu-bg.jpg") no-repeat center bottom; }
+div#header div#headMenu ul li a.headMenuArticlesSelected { background:url("../images/headmenu-bg.jpg") no-repeat center top; }
+div#header div#headMenu ul li a.headMenuContact:hover { background:url("../images/headmenu-bg.jpg") no-repeat right bottom; }
+div#header div#headMenu ul li a.headMenuContactSelected { background:url("../images/headmenu-bg.jpg") no-repeat right top; }
+
+div#header div#auth_navbar{
+    float:right;
+    text-align:right;
+    width:375px;
+    height:100px;
+    margin-right:10px;
+/**
+    margin-top:20px;
+    margin-left:790px;
+**/    
+}
+
+div#header div#auth_navbar a img {
+    border:0;
+}
+
+
+/*************************************************
+ * CONTENT STYLES                                *
+ *************************************************/
+div#content-wrapper {
+    width:980px;
+    min-height:240px;
+    margin:0 auto;
+    background-color:white;
+    padding-bottom:10px;
+}
+
+div#menu {
+    float:right;
+    width:230px;
+    margin-right:30px;
+    padding-top:15px;
+    background:url("../images/menu-top-bg.gif") no-repeat 0 0 #dbeaea;
+}
+
+div#menu div#menuFooter {
+    height:83px;
+    background:url("../images/menu-bottom-bg.gif") no-repeat 0 0;
+    margin-top:40px;
+}
+
+div#menu h2 {
+    color:#303d3d;
+    font-size:24px;
+    height:37px;
+    margin-left:15px;
+    padding-left:30px;
+    background:url("../images/menu-title-style.jpg") no-repeat 0 0;
+}
+
+div#menu ul {
+    list-style:none;
+    font-size:14px;
+}
+
+div#menu ul li a {
+    display:block;
+    padding: 2px 0 2px 15px;
+    margin-bottom:2px;
+    text-decoration:none;
+    color:#303d3d;
+}
+
+div#menu ul li a:hover {
+    color:white;
+    font-weight:bold;
+    background-color:#6e8e8e;
+    padding-left:25px;
+}
+
+div#menu div#searchbar {
+    height:20px;
+    width:183px;
+    margin-left:15px;
+}
+
+div#menu div#searchbar input.searchInputText {
+    border:1px solid #303d3d;
+    border-left:4px solid #303d3d;
+    padding:4px;
+    width:183px;
+}
+
+div#content {
+    width:660px;
+    min-height:403px;
+    margin-left:30px;
+    background:url("../images/content-bg.jpg") no-repeat 0 0 white;
+    font-size:14px;
+}
+
+div#content h1.titlePage {
+    color:#445663;
+    text-align:right;
+    margin-right:50px;
+}
+
+div#content div.post {
+    padding:10px;
+    margin-bottom:30px;
+}
+
+div#content div.post h1 {
+    color:#657777;
+    font-variant:small-caps;
+    font-size:24px;
+    font-weight:normal;
+    padding-left:115px;
+}
+
+div#content div.post div.datePost {
+    width:62px;
+    height:56px;
+    float:left;
+    margin-left:-10px;
+    background: url("../images/post-created.jpg") no-repeat 0 0;
+    text-align:right;
+    color:#303d3d;
+}
+
+div#content div.post div.datePost span {
+    padding-right:5px;
+}
+
+div#content div.post div.datePost span.datePostMonth {
+    display:block;
+    padding-top:5px;
+    font-size:12px;
+}
+
+div#content div.post div.datePost span.datePostDay {
+    font-size:28px;
+}
+
+div#content div.post div.infoPost {
+    margin-left:115px;
+    font-size:12px;
+}
+
+div#content div.post div.infoPost img {
+    vertical-align:middle;
+}
+
+div#content div.post div.postContent {
+    border-top:1px dashed #9ea2a2;
+    margin-top:20px;
+    text-align:justify;
+    font-size:14px;
+}
+
+div#content div.post div.postContent p,  div#content ul {
+    padding-top:5px;
+}
+
+div#content ul {
+    list-style: url("../images/bullet-list.jpg");
+    margin-left:60px;
+}
+
+div#content ul li:hover {
+    list-style: url("../images/bullet-list-hover.jpg");
+}
+
+div#content div.post div.postReadMore {
+    background-color:#edf1f1;
+    border-top:1px dashed #9ea2a2;
+    margin-top:20px;
+    height:22px;
+}
+
+div#content div.post div.postReadMore p {
+    text-align:right;
+    font-size:12px;
+    height:12px;
+    padding-top:2px;
+}
+
+div#content table {
+    margin:5px auto;
+    width:85%;
+    border-collapse:collapse;
+    text-align:left;
+}
+
+div#content table tr th, div#content table tr td {
+    border:1px solid #657777;
+    padding:3px;
+}
+
+div#content table tr th {
+    background-color:#b7cad7;
+    color:#34495a;
+    text-align:center;
+}
+
+div#content table tr td {
+    background-color:#e3e9ed;
+}
+
+div#content h3 {
+    color:#77838c;
+    text-decoration:underline;
+    padding:15px 0px 0px 15px;
+}
+
+div#content form label {
+    width:150px;
+    display:block;
+    float:left;
+    margin-bottom:20px;
+}
+
+div#content form input.contactInputText {
+    border:1px solid #303d3d;
+    border-left:4px solid #303d3d;
+    padding:4px;
+    width:320px;
+}
+
+div#content form textarea.contactTextArea {
+    border:1px solid #303d3d;
+    border-left:4px solid #303d3d;
+    padding:4px;
+    width:320px;
+}
+
+div#content a {
+    color:#337879;
+}
+
+div#content a:hover, div#content a:active {
+    color:#004f50;
+    background-color:#e1eaf1;
+}
+
+div#content a:visited {
+    color:#668383;
+}
+
+div#content-wrapper div.clear {
+    clear:both;
+}
+
+
+/*************************************************
+ * FOOTER STYLES                                 *
+ *************************************************/
+div#footer {
+    font-size:10px;
+    width:980px;
+    min-height:44px;
+    margin:0 auto;
+    padding-top: 10px;
+    padding-bottom: 5px;
+    background:url("../images/footer.jpg") no-repeat 0 0 white;
+}
+
+div#footer p {
+    margin-left:30px;
+    color:#303d3d;
+    letter-spacing:4px;
+    margin-bottom: 5px;
+}
+
+div#footer p a {
+    text-decoration:none;
+}
+
+div#footer ul {
+    list-style-type:none;
+    float:right;
+    margin-right:30px;
+}
+
+div#footer ul li {
+    float:left;
+}
+
+div#footer ul li a {
+    padding: 0 6px;
+}
+
+div#footer a {
+    text-decoration:none;
+    color:#303d3d;
+}
+
+div#footer a:hover {
+    text-decoration:underline;
+}

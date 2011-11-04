@@ -12,7 +12,7 @@ function ajax(u,s,t) {
         if(d){ query = d; }
     } else {
         pcs = [];
-        for(i=0; i<s.length; i++) {
+        if (s != null && s != undefined) for(i=0; i<s.length; i++) {
             q = jQuery("[name="+s[i]+"]").serialize();
             if(q){pcs.push(q);}
         }
@@ -22,11 +22,7 @@ function ajax(u,s,t) {
 }
 
 String.prototype.reverse = function () { return this.split('').reverse().join('');};
-function web2py_ajax_init() {
-  jQuery('.hidden').hide();
-  jQuery('.error').hide().slideDown('slow');
-  jQuery('.flash').click(function(e) { jQuery(this).fadeOut('slow'); e.preventDefault(); });
-  // jQuery('input[type=submit]').click(function(){var t=jQuery(this);t.hide();t.after('<input class="submit_disabled" disabled="disabled" type="submit" name="'+t.attr("name")+'_dummy" value="'+t.val()+'">')});
+function web2py_ajax_fields() {
   jQuery('input.integer').live('keyup', function(){this.value=this.value.reverse().replace(/[^0-9\-]|\-(?=.)/g,'').reverse();});
   jQuery('input.double,input.decimal').live('keyup', function(){this.value=this.value.reverse().replace(/[^0-9\-\.,]|[\-](?=.)|[\.,](?=[0-9]*[\.,])/g,'').reverse();});
   var confirm_message = (typeof w2p_ajax_confirm_message != 'undefined') ? w2p_ajax_confirm_message : "Are you sure you want to delete this object?";
@@ -34,13 +30,20 @@ function web2py_ajax_init() {
   var date_format = (typeof w2p_ajax_date_format != 'undefined') ? w2p_ajax_date_format : "%Y-%m-%d";
   var datetime_format = (typeof w2p_ajax_datetime_format != 'undefined') ? w2p_ajax_datetime_format : "%Y-%m-%d %H:%M:%S";
   try {
-      jQuery("input.datetime").AnyTime_picker({
+      jQuery("input.datetime").AnyTime_noPicker().AnyTime_picker({
 	      format: datetime_format.replace('%M','%i')});
-      jQuery("input.date").AnyTime_picker({
+      jQuery("input.date").AnyTime_noPicker().AnyTime_picker({
 	      format: date_format.replace('%M','%i')});
-      jQuery("input.time").AnyTime_picker({
+      jQuery("input.time").AnyTime_noPicker().AnyTime_picker({
 	      format: "%H:%i:%S"});
   } catch(e) {};
+};
+function web2py_ajax_init() {
+  jQuery('.hidden').hide();
+  jQuery('.error').hide().slideDown('slow');
+  jQuery('.flash').click(function(e) { jQuery(this).fadeOut('slow'); e.preventDefault(); });
+  // jQuery('input[type=submit]').click(function(){var t=jQuery(this);t.hide();t.after('<input class="submit_disabled" disabled="disabled" type="submit" name="'+t.attr("name")+'_dummy" value="'+t.val()+'">')});
+  web2py_ajax_fields();
 };
 
 jQuery(function() {   
@@ -60,6 +63,16 @@ function web2py_trap_form(action,target) {
       });
    });
 }
+function web2py_trap_link(target) {
+    jQuery('#'+target+' a.w2p_trap').each(function(i){
+	    var link=jQuery(this);
+	    link.click(function(e) {
+		    jQuery('.flash').hide().html('');
+		    web2py_ajax_page('get',link.attr('href'),[],target);
+		    e.preventDefault();
+		});
+	});  
+}
 function web2py_ajax_page(method,action,data,target) {
   jQuery.ajax({'type':method,'url':action,'data':data,
     'beforeSend':function(xhr) {
@@ -75,6 +88,7 @@ function web2py_ajax_page(method,action,data,target) {
       else if(content=='append') t.append(html);
       else if(content!='hide') t.html(html);  
       web2py_trap_form(action,target);
+      web2py_trap_link(target);
       web2py_ajax_init();      
       if(command) eval(command);
       if(flash) jQuery('.flash').html(flash).slideDown();

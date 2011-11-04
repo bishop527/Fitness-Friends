@@ -542,7 +542,7 @@ this.keyAhead();}
 else if(((key==86)||(key==118))&&event.ctrlKey)
 {this.inp.val("").change();var _this=this;setTimeout(function(){_this.showPkr(null);},100);return;}
 else
-this.showPkr(null);event.preventDefault();},keyAhead:function()
+return;event.preventDefault();},keyAhead:function()
 {if(this.fBtn.hasClass('AnyTime-mil9-btn'))
 this.yDiv.find('.AnyTime-cent0-btn').triggerHandler('click');else if(this.fBtn.hasClass('AnyTime-cent9-btn'))
 this.yDiv.find('.AnyTime-dec0-btn').triggerHandler('click');else if(this.fBtn.hasClass('AnyTime-dec9-btn'))

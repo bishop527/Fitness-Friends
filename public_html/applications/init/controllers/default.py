@@ -9,15 +9,20 @@
 ## - call exposes all registered services (none by default)
 #########################################################################
 
+@auth.requires_login()
 def index():
+   redirect(URL('home'))
+
+##def index():
 
     ## if user is already logged in, redirect to the user home page.
-    if auth.user:
-        redirect(URL(r=request, f='home'))  
-    
-    form = auth()
-    
-    return dict(form=form)
+##    if auth.user:
+##        redirect(URL(r=request, f='home'))  
+##    else:
+##        redirect(URL(r=request, f='user'))
+
+##    form = auth()        
+##    return dict(form = form)
 
 def user():
     """
@@ -33,15 +38,17 @@ def user():
         @auth.requires_permission('read','table name',record_id)
     to decorate functions that need access control
     """
-    
-    form = auth()
-    
-    return dict(form=form)
+
+    return dict(form=auth())
 
 ## Users home page.
 @auth.requires_login()
 def home():
+
+    return dict()
     
+def contact():
+
     return dict()
 
 def download():

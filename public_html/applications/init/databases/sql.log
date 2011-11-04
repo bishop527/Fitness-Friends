@@ -51,15 +51,13 @@ CREATE TABLE auth_cas(
     uuid CHAR(512)
 );
 success!
-timestamp: 2011-10-30T17:33:04.023000
-ALTER TABLE auth_user ADD gender CHAR(512);
-timestamp: 2011-10-30T17:33:04.036000
-ALTER TABLE auth_user ADD age CHAR(512);
-timestamp: 2011-10-30T17:33:04.047000
-ALTER TABLE auth_user ADD height CHAR(512);
-timestamp: 2011-10-30T17:33:04.069000
-ALTER TABLE auth_user ADD current_weight CHAR(512);
-timestamp: 2011-11-01T19:45:01.363000
+timestamp: 2011-11-03T21:47:03.169000
 ALTER TABLE auth_user ADD registration_id CHAR(512);
-timestamp: 2011-11-01T21:35:53.506000
+timestamp: 2011-11-04T09:20:28.665000
+ALTER TABLE auth_user ADD gender CHAR(512);
+timestamp: 2011-11-04T09:20:28.683000
+ALTER TABLE auth_user ADD height CHAR(512);
+timestamp: 2011-11-04T09:20:28.699000
 ALTER TABLE auth_user ADD birthday DATE;
+timestamp: 2011-11-04T09:20:28.718000
+ALTER TABLE auth_user ADD current_weight CHAR(512);

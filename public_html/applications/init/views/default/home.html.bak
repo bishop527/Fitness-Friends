@@ -1,0 +1,4 @@
+{{extend 'template.html'}}
+
+<h1>This is the Users Home Page</h1>
+<h3> Welcome {{=auth.user.first_name}}</h3>

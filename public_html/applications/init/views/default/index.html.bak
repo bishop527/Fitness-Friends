@@ -1,30 +1,18 @@
-{{extend 'layout.html'}}
+{{extend 'template.html'}}
 
-<table width="100%" border=0>
-<tbody>
-<tr>
-<td width="50%" valign="middle">
-    <font size="5">F</font><font size="4">ITNESS</font> <font size="5">C</font><font size="4">HALLENGE</font>
-    <br>
-    <font size="3">Step Up To The Challenge</font>
-    <br>
-    <img src="{{=URL('static','images/FitnessChallenge.png')}}" height="200"/>
-</td>
-<td width="50%">
-    <center><h3>{{=T( request.args(0).replace('_',' ').capitalize() )}}</h3></center>
-    {{=form}}
-    {{if request.args(0)=='login':}}
-    {{if not 'register' in auth.settings.actions_disabled:}}
-    <center><br/><a href="{{=URL(r=request,args='user/register')}}">register</a>
-    &nbsp&nbsp&nbsp&nbsp&nbsp
-    {{pass}}
-    {{if not 'request_reset_password' in auth.settings.actions_disabled:}}
-    <a href="{{=URL(r=request,args='request_reset_password')}}">    lost password</a></center>
-    {{pass}}
-    {{pass}}
-</td>
-</tr>
-</tbody>
-</table>
-
-<hr>
+{{=form.custom.begin}}
+<p>
+<center> <h3>E-Mail: {{=form.custom.widget.email}}</h3>
+<p>
+<h3>Password: {{=form.custom.widget.password}}</h3>
+<p>
+{{=form.custom.submit}}
+{{=form.custom.end}} 
+{{if not 'register' in auth.settings.actions_disabled:}}
+<br/><a href="{{=URL(r=request,args='/init/default/user/register')}}">register  </a>
+{{pass}}
+{{if not 'request_reset_password' in auth.settings.actions_disabled:}}
+<br/><a href="{{=URL(r=request,args='request_reset_password')}}">  lost password</a>
+{{pass}}
+{{pass}}
+</center>
