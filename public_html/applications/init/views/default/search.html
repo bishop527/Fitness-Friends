@@ -1,8 +1,7 @@
 {{extend 'UNd-template.html'}}
 
-<img src="{{=URL('download',args=auth.user.image)}}" height=100 />
-<p>
-<center><h2> Current Challenges </h2></center>
+<br>
+<center><h2> All Challenges </h2></center>
 <table>
     <th>Challenge Name</th>
     <th>Status</th>
@@ -12,7 +11,7 @@
     {{for challenge in challenges:}}
         <tr>        
             <td>{{=A(challenge.name, _href=URL('view_challenge', vars=dict(challenge=challenge.id)))}}</td>
-            <td>{{=challenge.status}} </td>
+            <td>{{=challenge.status}}</td>
             <td>{{=challenge.check_in}}</td>
             <td>{{=challenge.start_date}}</td>
             <td>{{=challenge.end_date}}</td>

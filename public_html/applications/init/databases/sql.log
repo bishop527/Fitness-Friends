@@ -61,3 +61,46 @@ timestamp: 2011-11-04T09:20:28.699000
 ALTER TABLE auth_user ADD birthday DATE;
 timestamp: 2011-11-04T09:20:28.718000
 ALTER TABLE auth_user ADD current_weight CHAR(512);
+timestamp: 2011-11-12T15:06:20.941000
+CREATE TABLE challenges(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT,
+    description TEXT,
+    start_date DATE,
+    end_date DATE,
+    participants TEXT,
+    check_in CHAR(512),
+    is_active CHAR(1),
+    created_on TIMESTAMP,
+    created_by INTEGER REFERENCES auth_user(id) ON DELETE CASCADE,
+    modified_on TIMESTAMP,
+    modified_by INTEGER REFERENCES auth_user(id) ON DELETE CASCADE
+);
+success!
+timestamp: 2011-11-12T15:06:26.423000
+CREATE TABLE user_profile(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT,
+    gender CHAR(512),
+    birthday DATE,
+    height CHAR(512),
+    current_weight CHAR(512),
+    image CHAR(512),
+    challenges INTEGER REFERENCES challenges(id) ON DELETE CASCADE,
+    is_active CHAR(1),
+    created_on TIMESTAMP,
+    created_by INTEGER REFERENCES auth_user(id) ON DELETE CASCADE,
+    modified_on TIMESTAMP,
+    modified_by INTEGER REFERENCES auth_user(id) ON DELETE CASCADE
+);
+success!
+timestamp: 2011-11-12T16:08:47.028000
+ALTER TABLE user_profile ADD user INTEGER REFERENCES auth_user(id) ON DELETE CASCADE;
+timestamp: 2011-11-12T19:53:49.113000
+ALTER TABLE auth_user ADD image CHAR(512);
+timestamp: 2011-11-12T19:53:49.134000
+ALTER TABLE auth_user ADD challenges TEXT;
+timestamp: 2011-11-13T12:24:37.427000
+ALTER TABLE challenges ADD status CHAR(512);
+timestamp: 2011-11-13T14:19:51.580000
+ALTER TABLE challenges ADD metric CHAR(512);

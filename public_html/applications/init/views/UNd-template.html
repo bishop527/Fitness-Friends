@@ -1,0 +1,75 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    {{###### include web2py specific js code (jquery, calendar, form stuff) }}
+    {{include 'web2py_ajax.html'}}
+    
+    <title>Fitness Challenge    </title>
+  <link rel="stylesheet" media="screen" href="{{=URL('static', 'css/UNd-style.css')}}" />
+</head>
+<body>
+
+<div id="header">
+	<h1 id="site-title">Fitness Challenge</h1>
+	<h3 id="slogan">Step Up To The Challenge</h3>
+
+</div>
+
+<div id="top-menu">
+	<ul>
+		<li class="before-selected"></li>
+		<li class="selected"><a href="{{=URL(r=request,f='index')}}">Home</a></li>
+		<li class="after-selected"></li>
+		<li class="top-menu-item"><a href="#">Categories</a></li>
+		<li class="top-menu-item"><a href="{{=URL(r=request,f='contact')}}">Contact</a></li>
+		<li class="top-menu-item"><a href="#">About</a></li>
+	</ul>
+	<div id="auth_navbar">
+		<br/>
+		{{try:}}{{=auth.navbar(action=URL('default','user'))}}{{except:pass}}</h3>
+	</div>
+</div>
+
+<div id="wrap-website">
+	<div id="content">
+		<div class="post">
+			<div class="head-post">
+				{{if request.args(0) != None:}}
+					<h1 class="titlePage">{{=T(request.args(0).replace('_',' ').capitalize())}}</h1>
+				{{else:}}
+					<h1 class="titlePage">{{=T(request.function.replace('_',' ').capitalize())}}</h1>
+				{{pass}}
+			</div>
+			<div class="body-post">
+				{{include}}
+			</div>
+		</div>
+	</div>
+	<div id="right-menu">
+		<div class="right-menu-item">
+			<div class="right-menu-title">
+				<h3>Links</h3>
+			</div>
+			<ul>
+				<li><a href="{{=URL(r=request,f='create_challenge')}}">Create a Challenge</a></li>
+				<li><a href="{{=URL(r=request,f='search')}}">Search for a Challenge</a></li>
+				<li><a href="#">Link #3</a></li>
+				<li><a href="#">Link #4</a></li>
+				<li><a href="#">Link #5</a></li>
+			</ul>
+			<div class="right-menu-bottom"></div>
+		</div>
+		
+	</div>
+	<div class="clean"></div>
+</div>
+
+<div id="footer">
+	<p>
+		UNd Theme - <a href="http://www.florian-hacquebart.eu">florian-hacquebart.eu</a> - <a href="http://validator.w3.org/check?uri=referer">xhtml</a> &amp; <a href="http://jigsaw.w3.org/css-validator/check/referer">css</a> valid
+	</p>
+</div>
+
+</body>
+</html>

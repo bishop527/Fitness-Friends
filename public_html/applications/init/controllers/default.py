@@ -45,8 +45,38 @@ def user():
 @auth.requires_login()
 def home():
 
-    return dict()
+    db.challenges.name.represent = lambda name, row: A(name, _href=URL('home'))
     
+    ## get the challenges the users is currently enrolled in
+    query = db.challenges.participants == auth.user.id
+    challenges = db(query).select(orderby=db.challenges.name)
+
+    return dict(challenges=challenges)
+
+def create_challenge():
+
+    form = SQLFORM(db.challenges).process()
+
+    return dict(form = form)
+
+def view_challenge():
+
+    chall_id= request.vars.challenge
+    chall_query = db.challenges.id == chall_id
+    challenge = db(chall_query).select().first()
+    
+    form = SQLFORM(db.challenges, challenge)
+
+    return dict(form = form)
+
+def search():
+
+    ## get all challenges
+
+    challenges = db(db.challenges).select(orderby=db.challenges.name)
+
+    return dict(challenges=challenges)
+        
 def contact():
 
     return dict()

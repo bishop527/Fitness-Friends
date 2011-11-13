@@ -3,7 +3,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-
+    
+    {{###### include web2py specific js code (jquery, calendar, form stuff) }}
+    {{include 'web2py_ajax.html'}}
+    
     <title>Fitness Challenge    </title>
 
     <link rel="stylesheet" type="text/css" media="screen" href="{{=URL('static', 'css/style.css')}}" />
@@ -20,6 +23,7 @@
     </div>
     
     <div id="mainTitle">
+    <br/>
         <h2>Fitness Challenge </h2>
         <h3>Step Up To The Challenge
         <br/>
@@ -35,7 +39,11 @@
 <div id="content-wrapper">
 
     <div id="content">
-        <h1 class="titlePage">{{=T(request.function.replace('_',' ').capitalize())}}</h1>
+        {{if request.args(0) != NULL:}}
+            <h1 class="titlePage">{{=T(request.args(0).replace('_',' ').capitalize())}}</h1>
+        {{else:}}
+            <h1 class="titlePage">{{=T(request.function.replace('_',' ').capitalize())}}</h1>
+        {{pass}}
         <div class="post">
             {{include}}
             <div class="postContent">

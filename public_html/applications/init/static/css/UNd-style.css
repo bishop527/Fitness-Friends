@@ -1,0 +1,335 @@
+/*------------------------------------*/
+/* UNd Theme free web template        */
+/* Author: Florian Hacquebart         */
+/* Website: www.florian-hacquebart.eu */
+/*------------------------------------*/
+
+/* Global styles */
+* {
+	margin:0;
+	padding:0;
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Header styles */
+div#header {
+	position:relative;
+	width:1000px;
+	height:150px;
+	margin-left:auto;
+	margin-right:auto;
+	background:url('../images/FC-middle.png') top right no-repeat;
+}
+div#header h1#site-title {
+	color:#66a424;
+	font-size:33px;
+	margin-left:40px;
+	padding-top:25px;
+}
+div#header h3#slogan {
+	color:#66a424;
+	font-size:16px;
+	margin-left:40px;
+	font-weight:normal;
+}
+div#header div#rss-logo {
+	position:absolute;
+	top:90px;
+	left:552px;
+	height:64px;
+	width:64px;
+	background:url('../images/header-logo.jpg') top left no-repeat;
+}
+div#header div#rss-logo:hover {
+	cursor: pointer;
+	background:url('../images/header-logo.jpg') top right no-repeat;
+}
+div#header div#tweeter-logo {
+	position:absolute;
+	top:55px;
+	left:810px;
+	height:64px;
+	width:64px;
+	background:url('../images/header-logo.jpg') bottom left no-repeat;
+}
+div#header div#tweeter-logo:hover {
+	cursor: pointer;
+	background:url('../images/header-logo.jpg') bottom right no-repeat;
+}
+
+
+/* Top menu styles */
+div#top-menu {
+	width:1000px;
+	height:45px;
+	margin-left:auto;
+	margin-right:auto;
+	background:url('../images/top-menu.jpg') top left no-repeat;
+}
+
+div#top-menu div#auth_navbar{
+    float:right;
+    text-align:right;
+    width:375px;
+    height:45px;
+	color:#325c05;
+	line-height: 15px;
+    margin-right:10px;
+/**
+    margin-top:20px;
+    margin-left:790px;
+**/    
+}
+
+div#top-menu ul {
+	margin-left:10px;
+}
+div#top-menu ul li {
+	float:left;
+	display:block;
+	list-style:none;
+	height:45px;
+	line-height:45px;
+}
+div#top-menu ul li.after-selected {
+	margin-right:4px;
+}
+div#top-menu ul li.top-menu-item {
+	margin-right:10px;
+}
+div#top-menu ul li.top-menu-item, div#top-menu ul li.before-selected {
+	margin-left:8px;
+}
+div#top-menu ul li.after-selected {
+	width:10px;
+	background:url('../images/top-menu-after-selected.jpg') top left no-repeat;
+}
+div#top-menu ul li.before-selected {
+	width:10px;
+	background:url('../images/top-menu-before-selected.jpg') top left no-repeat;
+}
+div#top-menu ul li.selected {
+	background:url('../images/top-menu-selected.jpg') top left repeat-x;
+	padding-left:4px;
+	padding-right:4px;
+}
+div#top-menu ul li a {
+	text-decoration:none;
+	color:#325c05;
+	font-size:13px;
+}
+div#top-menu ul li.top-menu-item a {
+	color:#416d13;
+}
+div#top-menu ul li.top-menu-item a:hover {
+	color:#325c05;
+	text-decoration:underline;
+}
+
+/* Main content styles */
+div#wrap-website {
+	width:1000px;
+	margin-top:35px;
+	margin-left:auto;
+	margin-right:auto;
+}
+div#content {
+	width:783px;
+	float:left;
+}
+div#right-menu {
+	width:190px;
+	float:right;
+}
+div.clean {
+	clear:both;
+}
+
+/* Right menu styles */
+div.right-menu-item {
+	background: url('../images/right-menu-item-bg.jpg') top left repeat-y;
+	margin-bottom:25px;
+}
+div.right-menu-title {
+	height:32px;
+	background: url('../images/right-menu-title-bg.jpg') top left no-repeat;
+}
+div.right-menu-title h3 {
+	width:180px;
+	height:30px;
+	float:right;
+	color:#d0ff9e;
+	font-size:13px;
+	line-height:30px;
+	text-indent:30px;
+}
+div.right-menu-bottom {
+	margin-top:-30px;
+	height:46px;
+	background: url('../images/right-menu-item-bottom-bg.jpg') top left no-repeat;
+}
+div.right-menu-item ul {
+	list-style:none;
+	margin-left:40px;
+}
+div.right-menu-item ul li a {
+	color: #325c05;
+	font-size:12px;
+	text-decoration:none;
+}
+div.right-menu-item ul li a:hover {
+	text-decoration:underline;
+}
+
+
+/* Post styles */
+div.post {
+	width:760px;
+	margin-left:30px;
+	margin-bottom:60px;
+}
+div.post div.head-post {
+	position:relative;
+}
+div.post div.head-post h1 {
+	color:#325c05;
+	font-size:22px;
+	border-bottom:1px solid #9ee750;
+}
+div.post div.head-post div.calendar {
+	position:absolute;
+	width:64px;
+	height:64px;
+	top:0;
+	right:0;
+	background:url('../images/calendar.png') top left no-repeat;
+}
+div.post div.head-post div.calendar p.month {
+	color:#fff;
+	text-align:center;
+	font-size:10px;
+	margin-top:13px;
+}
+div.post div.head-post div.calendar p.day {
+	color:#000;
+	text-align:center;
+	font-size:18px;
+	font-weight:bold;
+	margin-top:2px;
+}
+div.post div.head-post div.tags {
+	height:38px;
+	font-size:10px;
+	background:url('../images/tags.jpg') 10px center no-repeat;
+	text-indent:35px;
+	line-height:38px;
+}
+div.post div.head-post div.tags a {
+	color:#325c05;
+}
+div.post div.body-post p {
+	font-size:11px;
+	margin-top:10px;
+	margin-bottom:15px;
+	text-align:justify;
+}
+
+div.post div.body-post h2  {
+	color:#325c05;
+	margin-left:auto;
+	margin-right:auto;
+	font-size:22px;
+
+}
+
+div.post div.body-post h3  {
+	color:#325c05;
+	margin-left:auto;
+	margin-right:auto;
+	font-size:18px;
+
+}
+
+div.post div.body-post table {
+	border-collapse:collapse;
+	margin-top:10px;
+	margin-bottom:15px;
+	margin-left:auto;
+	margin-right:auto;
+	font-size:18px;
+}
+div.post div.body-post table th, div.post div.body-post table td {
+	border:1px solid #325c05;
+	padding:6px;
+	text-align:center;
+}
+div.post div.body-post table th {
+	color:#325c05;
+	background:#9ee750;
+}
+div.post div.body-post a {
+	color:#325C05;
+}
+div.post div.body-post a:hover {
+	color:#9EE750;
+}
+
+/* Form styles */
+div.post form p label {
+	display:block;
+	float:left;
+	width:110px;
+	line-height:24px;
+}
+div.post form p input[type=text] {
+	border:1px solid #325c05;
+	border-left:3px solid #325c05;
+	padding: 3px;
+	background:#d0ff9e;
+	font-style:italic;
+	color:#325c05;
+	width:268px;
+}
+div.post form textarea {
+	border:1px solid #325c05;
+	border-left:3px solid #325c05;
+	padding: 3px;
+	background:#d0ff9e;
+	font-style:italic;
+	color:#325c05;
+	margin-bottom:25px;
+}
+div.post form p input[type=submit] {
+	padding:5px;
+	border:1px solid #325c05;
+	background:#d0ff9e;
+	color:#325c05;
+	font-weight:bold;
+	margin-left:350px;
+}
+div.post form p input[type=submit]:hover {
+	cursor:pointer;
+	color:black;
+}
+
+/* Footer styles */
+div#footer {
+	width:1000px;
+	height:118px;
+	background:url('../images/footer.jpg') left top no-repeat;
+	margin-left:auto;
+	margin-right:auto;
+	text-align:center;
+}
+div#footer p {
+	padding-top:80px;
+	font-size:11px;
+	color:white;
+}
+div#footer a {
+	color:#d0ff9e;
+	text-decoration:none;
+}
+div#footer a:hover {
+	text-decoration:underline;
+}
