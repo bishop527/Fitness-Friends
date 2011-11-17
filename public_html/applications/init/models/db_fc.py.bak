@@ -8,7 +8,7 @@ db.define_table('events',
     Field('end_date','date'),
     Field('participants', 'list:reference auth_user'),
     Field('check_in', 'string'),
-    Field('status', 'string', default='Pending'),
+    Field('status', 'string'),
     Field('metric_type', 'string'),
     auth.signature,
     format='%(name)s')
