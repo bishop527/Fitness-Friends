@@ -1,6 +1,5 @@
 {{extend 'UNd-template.html'}}
 
-
 {{block top_menu}}
     <ul>
         <li class="before-selected"></li>
@@ -12,7 +11,7 @@
     </ul>
 {{end}}
 
-
+<div id="web2py_user_form">
 {{if request.args(0)=='register':}}
     <p>
     {{=form.custom.begin}}
@@ -89,6 +88,18 @@
     {{=form.custom.end}} 
 
 {{pass}}    
+
+{{if request.args(0)=='change_password':}}
+    <p>
+    {{=form.custom.begin}}
+    <h3>Old Password: {{=form.custom.widget.old_password}}</h3>
+    <h3>NewPassword: {{=form.custom.widget.new_password}}</h3>
+    <h3>Verify Password: {{=form.custom.widget.new_password2}}</h3>
+    {{=form.custom.submit}}
+    {{=form.custom.end}} 
+
+{{pass}}    
+
 </div>
 
 <script language="javascript">

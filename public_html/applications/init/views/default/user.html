@@ -88,6 +88,21 @@
     {{=form.custom.end}} 
 
 {{pass}}    
+
+{{if request.args(0)=='change_password':}}
+    <p>
+    {{=form.custom.begin}}
+    <h3>Old Password: {{=form.custom.widget.old_password}}</h3>
+        <br>
+    <h3>NewPassword: {{=form.custom.widget.new_password}}</h3>
+        <br>
+    <h3>Verify Password: {{=form.custom.widget.new_password2}}</h3>
+        <br>
+    {{=form.custom.submit}}
+    {{=form.custom.end}} 
+
+{{pass}}    
+
 </div>
 
 <script language="javascript">
