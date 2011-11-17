@@ -104,3 +104,33 @@ timestamp: 2011-11-13T12:24:37.427000
 ALTER TABLE challenges ADD status CHAR(512);
 timestamp: 2011-11-13T14:19:51.580000
 ALTER TABLE challenges ADD metric CHAR(512);
+timestamp: 2011-11-16T10:06:43.289000
+CREATE TABLE events(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name CHAR(512),
+    description TEXT,
+    start_date DATE,
+    end_date DATE,
+    participants TEXT,
+    check_in CHAR(512),
+    status CHAR(512),
+    metric_name CHAR(512),
+    metric_value DOUBLE,
+    is_active CHAR(1),
+    created_on TIMESTAMP,
+    created_by INTEGER REFERENCES auth_user(id) ON DELETE CASCADE,
+    modified_on TIMESTAMP,
+    modified_by INTEGER REFERENCES auth_user(id) ON DELETE CASCADE
+);
+success!
+timestamp: 2011-11-16T13:05:31.673000
+ALTER TABLE events ADD metric_type CHAR(512);
+timestamp: 2011-11-16T13:06:02.595000
+CREATE TABLE event_status(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    event_name CHAR(512),
+    user_name CHAR(512),
+    goal INTEGER,
+    check_in TEXT
+);
+success!

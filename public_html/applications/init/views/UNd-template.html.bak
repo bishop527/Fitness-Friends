@@ -17,8 +17,6 @@
 </div>
 
 <div id="top-menu">
-    {{block top_menu}}
-    {{end}}
     <div id="auth_navbar">
         <br/>
         {{try:}}{{=auth.navbar(action=URL('default','user'))}}{{except:pass}}</h3>

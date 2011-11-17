@@ -45,37 +45,58 @@ def user():
 @auth.requires_login()
 def home():
 
-    db.challenges.name.represent = lambda name, row: A(name, _href=URL('home'))
+    db.events.name.represent = lambda name, row: A(name, _href=URL('home'))
     
     ## get the challenges the users is currently enrolled in
-    query = db.challenges.participants == auth.user.id
-    challenges = db(query).select(orderby=db.challenges.name)
+    query = db.events.participants == auth.user.id
+    events = db(query).select(orderby=db.events.name)
 
-    return dict(challenges=challenges)
+    return dict(events=events)
 
+
+@auth.requires_login()
 def create_challenge():
 
-    form = SQLFORM(db.challenges)
+    form = SQLFORM(db.events)
+    
+    if form.process(session=None, onvalidation=date_compare, formname='create_challenge').accepted:
+        response.flash = 'form accepted'
+        redirect(URL('home'))
+    elif form.errors:
+        response.flash = 'form has errors'
+    else:
+        response.flash = 'please fill the form'
 
     return dict(form = form)
 
+def date_compare(form):
+    if form.vars.start_date > form.vars.end_date:
+        form.errors.end_date = 'End Date must be after Start Date'
+        
+@auth.requires_login()
 def view_challenge():
 
-    chall_id= request.vars.challenge
-    chall_query = db.challenges.id == chall_id
-    challenge = db(chall_query).select().first()
+    event_id= request.vars.events
+    event_query = db.events.id == event_id
+    event = db(event_query).select().first()
     
-    form = SQLFORM(db.challenges, challenge)
+    form = SQLFORM(db.events, event)
 
     return dict(form = form)
 
+def get_leaders_board(event_id):
+
+    
+    return dict()
+    
+@auth.requires_login()
 def search():
 
     ## get all challenges
 
-    challenges = db(db.challenges).select(orderby=db.challenges.name)
+    events = db(db.events).select(orderby=db.events.name)
 
-    return dict(challenges=challenges)
+    return dict(events=events)
         
 def contact():
 

@@ -1,3 +1,35 @@
 {{extend 'UNd-template.html'}}
+{{block top_menu}}
+    <ul>
+        <li class="before-selected"></li>
+        <li class="selected"><a href="{{=URL(r=request,f='index')}}">Home</a></li>
+        <li class="after-selected"></li>
+        <li class="top-menu-item"><a href="#">Categories</a></li>
+        <li class="top-menu-item"><a href="{{=URL(r=request,f='contact')}}">Contact</a></li>
+        <li class="top-menu-item"><a href="#">About</a></li>
+    </ul>
+{{end}}
 
-{{=form}}
+<p>
+<h4>
+Create your own challenge and invite others to participate.<br>
+Fill in the details of your challenge below.
+</h4>
+<p>
+{{=form.custom.begin}}
+<h3>Challenge Name: {{=form.custom.widget.name}}</h3>
+<br><br>
+<h3>Describe Your Challenge:</h3>
+{{=form.custom.widget.description}}
+<br><br>
+<h3>Start Date: {{=form.custom.widget.start_date}} &nbsp&nbsp&nbsp&nbsp End Date: {{=form.custom.widget.end_date}}</h3>
+<br><br>
+<h3>How often should participants record their status? {{=form.custom.widget.check_in}}</h3>
+<br><br>
+<h3>What metric will be used to determine the winner? {{=form.custom.widget.metric_type}}</h3>
+<br><br>
+<h3>Who should be invited to this challenge?</h3> {{=form.custom.widget.participants}}
+<br><br>
+
+{{=form.custom.submit}}
+{{=form.custom.end}}

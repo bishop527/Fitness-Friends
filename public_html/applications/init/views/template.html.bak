@@ -39,7 +39,7 @@
 <div id="content-wrapper">
 
     <div id="content">
-        {{if request.args(0) != NULL:}}
+        {{if request.args(0) != None:}}
             <h1 class="titlePage">{{=T(request.args(0).replace('_',' ').capitalize())}}</h1>
         {{else:}}
             <h1 class="titlePage">{{=T(request.function.replace('_',' ').capitalize())}}</h1>

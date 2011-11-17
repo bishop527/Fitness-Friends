@@ -1,6 +1,17 @@
 {{extend 'UNd-template.html'}}
-<div id="web2py_user_form">
 
+{{block top_menu}}
+    <ul>
+        <li class="before-selected"></li>
+        <li class="selected"><a href="{{=URL(r=request,f='index')}}">Home</a></li>
+        <li class="after-selected"></li>
+        <li class="top-menu-item"><a href="#">Categories</a></li>
+        <li class="top-menu-item"><a href="{{=URL(r=request,f='contact')}}">Contact</a></li>
+        <li class="top-menu-item"><a href="#">About</a></li>
+    </ul>
+{{end}}
+
+<div id="web2py_user_form">
 {{if request.args(0)=='register':}}
     <p>
     {{=form.custom.begin}}

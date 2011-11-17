@@ -1,5 +1,16 @@
 {{extend 'UNd-template.html'}}
 
+{{block top_menu}}
+    <ul>
+        <li class="before-selected"></li>
+        <li class="selected"><a href="{{=URL(r=request,f='index')}}">Home</a></li>
+        <li class="after-selected"></li>
+        <li class="top-menu-item"><a href="#">Categories</a></li>
+        <li class="top-menu-item"><a href="{{=URL(r=request,f='contact')}}">Contact</a></li>
+        <li class="top-menu-item"><a href="#">About</a></li>
+    </ul>
+{{end}}
+
 <img src="{{=URL('download',args=auth.user.image)}}" height=100 />
 <p>
 <center><h2> Current Challenges </h2></center>
@@ -12,7 +23,7 @@
     {{for challenge in challenges:}}
         <tr>        
             <td>{{=A(challenge.name, _href=URL('view_challenge', vars=dict(challenge=challenge.id)))}}</td>
-            <td>{{=challenge.status}} </td>
+            <td>{{=challenge.status}}</td>
             <td>{{=challenge.check_in}}</td>
             <td>{{=challenge.start_date}}</td>
             <td>{{=challenge.end_date}}</td>

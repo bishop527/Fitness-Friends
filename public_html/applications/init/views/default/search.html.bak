@@ -1,20 +1,20 @@
 {{extend 'UNd-template.html'}}
 
 <br>
-<center><h2> AllChallenges </h2></center>
+<center><h2> All Challenges </h2></center>
 <table>
     <th>Challenge Name</th>
     <th>Status</th>
     <th>Check In</th>
     <th>Start Date</th>
     <th>End Date</th>
-    {{for challenge in challenges:}}
+    {{for event in events:}}
         <tr>        
-            <td>{{=A(challenge.name, _href=URL('view_challenge', vars=dict(challenge=challenge.id)))}}</td>
-            <td>{{=challenge.status}}</td>
-            <td>{{=challenge.check_in}}</td>
-            <td>{{=challenge.start_date}}</td>
-            <td>{{=challenge.end_date}}</td>
+            <td>{{=A(event.name, _href=URL('view_challenge', vars=dict(event=event.id)))}}</td>
+            <td>{{=event.status}}</td>
+            <td>{{=event.check_in}}</td>
+            <td>{{=event.start_date}}</td>
+            <td>{{=event.end_date}}</td>
         </tr>
     {{pass}}
 </table>

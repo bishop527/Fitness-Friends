@@ -250,6 +250,8 @@ div.post div.body-post h3  {
 
 div.post div.body-post select {
     font-size:large;
+    padding:5;
+    width:50;
 }
 
 div.post div.body-post table {
