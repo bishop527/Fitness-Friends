@@ -1,28 +1,10 @@
 # -*- coding: utf-8 -*-
 # this file is released under public domain and you can use without limitations
 
-#########################################################################
-## This is a samples controller
-## - index is the default action of any application
-## - user is required for authentication and authorization
-## - download is for downloading files uploaded in the db (does streaming)
-## - call exposes all registered services (none by default)
-#########################################################################
-
+##### Page Functions #####
 @auth.requires_login()
 def index():
    redirect(URL('home'))
-
-##def index():
-
-    ## if user is already logged in, redirect to the user home page.
-##    if auth.user:
-##        redirect(URL(r=request, f='home'))  
-##    else:
-##        redirect(URL(r=request, f='user'))
-
-##    form = auth()        
-##    return dict(form = form)
 
 def user():
     """
@@ -53,7 +35,6 @@ def home():
 
     return dict(events=events)
 
-
 @auth.requires_login()
 def create_challenge():
 
@@ -68,27 +49,20 @@ def create_challenge():
         response.flash = 'please fill the form'
 
     return dict(form = form)
-
-def date_compare(form):
-    if form.vars.start_date > form.vars.end_date:
-        form.errors.end_date = 'End Date must be after Start Date'
         
 @auth.requires_login()
 def view_challenge():
 
-    event_id= request.vars.events
+    event_id= request.vars.event
     event_query = db.events.id == event_id
     event = db(event_query).select().first()
     
+    users = get_users(event_id)
+    
     form = SQLFORM(db.events, event)
 
-    return dict(form = form)
+    return dict(form=form, users=users)
 
-def get_leaders_board(event_id):
-
-    
-    return dict()
-    
 @auth.requires_login()
 def search():
 
@@ -101,6 +75,21 @@ def search():
 def contact():
 
     return dict()
+    
+##### Utility Functions #####    
+
+def get_users(event_id):
+
+    user_query = db.event_status.event == event_id
+    users = db(user_query).select()
+    
+    return (users)
+    
+    
+# Make sure Start Date is less then End Date
+def date_compare(form):
+    if form.vars.start_date > form.vars.end_date:
+        form.errors.end_date = 'End Date must be after Start Date'
 
 def download():
     """

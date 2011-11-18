@@ -26,11 +26,12 @@ Fill in the details of your challenge below.
 <br><br>
 <h3>How often should participants record their status? {{=form.custom.widget.check_in}}</h3>
 <br><br>
-<h3>What metric will be used to determine the winner? {{=form.custom.widget.metric_type}}</h3>
+<h3>Metric Name: {{=form.custom.widget.metric_name}}&nbsp&nbsp&nbsp&nbsp Metric Type: {{=form.custom.widget.metric_type}}</h3>
 <br><br>
-<h3>Who should be invited to this challenge?</h3> {{=form.custom.widget.participants}}
-<br><br>
-{{=form.custom.widget.status}}
+<h3>Who should be invited to this challenge?</h3>
+<h4>(press CTRL to select multiple people)</h4>
+<br>
+{{=form.custom.widget.participants}}
 <br><br>
 
 {{=form.custom.submit}}

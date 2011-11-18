@@ -10,6 +10,27 @@
     padding:0;
     font-family: Arial, Helvetica, sans-serif;
 }
+/*********** web2py specific ***********/
+div.flash {
+    font-weight: bold;
+    display: none;
+    position: fixed;
+    padding: 10px;
+    top: 40px;
+    right: 10px;
+    min-width: 280px;
+    opacity: 0.85;
+    margin: 0px 0px 10px 10px;
+    color: #fff;
+    vertical-align: middle;
+    cursor: pointer;
+    background: #000;
+    border: 2px solid #fff;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    z-index: 2;
+}
+
 
 /* Header styles */
 div#header {
@@ -227,6 +248,14 @@ div.post div.head-post div.tags {
 div.post div.head-post div.tags a {
     color:#325c05;
 }
+
+div.post div.error {
+    background-color: red;
+    color: white;
+    padding: 3px;
+	font-size: 18px;
+}
+
 div.post div.body-post p {
     font-size:11px;
     margin-top:10px;
@@ -246,6 +275,13 @@ div.post div.body-post h3  {
     margin-left:auto;
     margin-right:auto;
     font-size:18px;
+}
+
+div.post div.body-post h4  {
+    color:#325c05;
+    margin-left:auto;
+    margin-right:auto;
+    font-size:14px;
 }
 
 div.post div.body-post select {

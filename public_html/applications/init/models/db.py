@@ -40,7 +40,7 @@ crud, service, plugins = Crud(db), Service(), PluginManager()
 auth.settings.extra_fields['auth_user']= [
     Field('gender', requires=IS_IN_SET(['Male', 'Female']), widget=lambda f, v: SQLFORM.widgets.radio.widget(f, v, style='divs')),
     Field('birthday', 'date'),
-    Field('height', requires=IS_INT_IN_RANGE(48, 84, error_message='height needs to be between 48 in. and 84 in.')),
+    Field('height', requires=IS_INT_IN_RANGE(48, 85, error_message='height needs to be between 48 in. and 84 in.')),
     Field('current_weight'),
     Field('image', 'upload'),
     Field('challenges', 'list:reference challenges')]
@@ -80,3 +80,5 @@ use_janrain(auth,filename='private/janrain.key')
 ## >>> rows=db(db.mytable.myfield=='value').select(db.mytable.ALL)
 ## >>> for row in rows: print row.id, row.myfield
 #########################################################################
+
+db.auth_user._format = "%(first_name)s %(last_name)s"

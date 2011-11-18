@@ -134,3 +134,5 @@ CREATE TABLE event_status(
     check_in TEXT
 );
 success!
+timestamp: 2011-11-17T11:47:43.075000
+ALTER TABLE event_status ADD event INTEGER REFERENCES events(id) ON DELETE CASCADE;
