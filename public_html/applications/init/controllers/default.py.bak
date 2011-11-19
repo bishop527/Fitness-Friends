@@ -85,10 +85,16 @@ def contact():
 # Get the users registered for this event
 def get_users(event_id):
 
+    board = []
     user_query = db.event_users.event == event_id
     users = db(user_query).select()
     
-    return (users)
+    for user in users:
+        entry_query = db.entries.user == user
+        entry = db(entry_query).select(orderby = date_entered).last()
+        board.append(entry)
+        
+    return (board)
     
     
 # Make sure Start Date is less then End Date

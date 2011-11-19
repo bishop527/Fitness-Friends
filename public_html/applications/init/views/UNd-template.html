@@ -46,11 +46,10 @@
                 <h3>Links</h3>
             </div>
             <ul>
-                <li><a href="{{=URL(r=request,f='create_challenge')}}">Create a Challenge</a></li>
+                <li><a href="{{=URL(r=request,f='create')}}">Create a Challenge</a></li>
                 <li><a href="{{=URL(r=request,f='search')}}">Search for a Challenge</a></li>
-                <li><a href="#">Link #3</a></li>
-                <li><a href="#">Link #4</a></li>
-                <li><a href="#">Link #5</a></li>
+            	{{block right_menu}}
+    			{{end}}
             </ul>
             <div class="right-menu-bottom"></div>
         </div>

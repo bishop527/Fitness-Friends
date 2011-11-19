@@ -11,6 +11,13 @@
     </ul>
 {{end}}
 
+{{block right_menu}}
+	{{if auth.user.id == form.created_by:}}
+	        <li>{{=A('Edit Challenge', _href=URL('edit', vars=dict(event=form.id)))}}</li>
+<!--  		<li><a href="{{=URL(r=request,f='edit, vars=event=form.id')}}">Edit a Challenge</a></li>-->
+	{{pass}}
+{{end}}
+
 <table class='event' width="100%">
     <tr>
         <td width="70%" rowspan="2"><h2> {{=form.name}} </h2></td>
@@ -33,7 +40,7 @@
         <td>Metric Name: </td><td> {{=form.metric_name}} </td>
     </tr>
     <tr>
-        <td># of Partcipants: </td><td>{{=count}}</td>
+        <td># of Partcipants: </td><td>{{=num_users}}</td>
     </tr>    
 </table> 
 <hr>
@@ -41,6 +48,18 @@
 <center><h3> Leaders Board </h3></center>
 <h2> Under Development </h2>
 </br>
-{{=users}}
+<table>
+    <th>Name</th>
+    <th>Entry</th>
+    <th>Date of Last Entry</th>
+	{{for entry in entries:}}    
+        <tr>        
+            <td>{{=entry.user.user_name.first_name}}</td>
+            <td>{{=entry.value}}</td>
+            <td>{{=entry.date_entered}}</td>
+        </tr>
+    {{pass}}
+</table>
+
 <br>
 <hr>

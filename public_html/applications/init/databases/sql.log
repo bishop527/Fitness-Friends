@@ -160,3 +160,18 @@ timestamp: 2011-11-18T21:03:32.092000
 ALTER TABLE event_users ADD last_entry DATE;
 timestamp: 2011-11-18T21:03:32.206000
 ALTER TABLE entries ADD value DOUBLE;
+timestamp: 2011-11-19T14:58:44.819000
+CREATE TABLE event_entries(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    event INTEGER REFERENCES events(id) ON DELETE CASCADE,
+    user_name INTEGER REFERENCES auth_user(id) ON DELETE CASCADE,
+    goal DOUBLE,
+    date_entered DATE,
+    value DOUBLE,
+    is_active CHAR(1),
+    created_on TIMESTAMP,
+    created_by INTEGER REFERENCES auth_user(id) ON DELETE CASCADE,
+    modified_on TIMESTAMP,
+    modified_by INTEGER REFERENCES auth_user(id) ON DELETE CASCADE
+);
+success!

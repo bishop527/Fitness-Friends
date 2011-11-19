@@ -35,12 +35,32 @@ def home():
 
     return dict(events=events)
 
+# Create a new challenge
 @auth.requires_login()
-def create_challenge():
+def create():
 
     form = SQLFORM(db.events)
+         
+    if form.process(session=None, onvalidation=date_compare, formname='create').accepted:
+        response.flash = 'form accepted'
+        redirect(URL('home'))
+    elif form.errors:
+        response.flash = 'form has errors'
+    else:
+        response.flash = 'please fill the form'
+ 
+    return dict(form = form)
+
+# Edit an existing Challenge. You can only edit challenges you created
+@auth.requires_login()
+def edit():
+
+    event_id= request.vars.event
+    event_query = db.events.id == event_id
+    event = db(event_query).select().first()
+    form= SQLFORM(db.events, event)
     
-    if form.process(session=None, onvalidation=date_compare, formname='create_challenge').accepted:
+    if form.process(session=None, onvalidation=date_compare, formname='edit').accepted:
         response.flash = 'form accepted'
         redirect(URL('home'))
     elif form.errors:
@@ -58,14 +78,14 @@ def challenge():
     event_query = db.events.id == event_id
     form= db(event_query).select().first()
     
-    users = get_users(event_id)
-    count = 0
-    for user in users:
-        count = count + 1
-    
+    # Get the registered users
+    entries_query = db.event_users.event == event_id
+    entries = db(entries_query).select(db.entries.ALL, groupby=db.entries.user)
+
+    num_users = len(entries)        
     form.writable = False
 
-    return dict(form=form, users=users, count=count)
+    return dict(form=form, entries=entries, num_users=num_users)
 
 @auth.requires_login()
 def search():
@@ -87,10 +107,16 @@ def get_users(event_id):
 
     user_query = db.event_users.event == event_id
     users = db(user_query).select()
-    
+            
     return (users)
     
+def get_entries(user):
     
+    entry_query = db.entries.user == user
+    entry = db(entry_query).select(orderby=db.entries.date_entered).last()
+
+    return (entry)    
+
 # Make sure Start Date is less then End Date
 def date_compare(form):
     if form.vars.start_date > form.vars.end_date:
