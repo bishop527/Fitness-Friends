@@ -28,9 +28,9 @@ def user():
 def home():
 
     db.events.name.represent = lambda name, row: A(name, _href=URL('home'))
-    
+        
     ## get the challenges the users is currently enrolled in
-    query = db.events.participants == auth.user.id
+    query = db.events.participants.contains(auth.user.id)
     events = db(query).select(orderby=db.events.name)
 
     return dict(events=events)
@@ -49,19 +49,23 @@ def create_challenge():
         response.flash = 'please fill the form'
 
     return dict(form = form)
-        
+    
+## View the details of a challenge        
 @auth.requires_login()
-def view_challenge():
+def challenge():
 
     event_id= request.vars.event
     event_query = db.events.id == event_id
-    event = db(event_query).select().first()
+    form= db(event_query).select().first()
     
     users = get_users(event_id)
+    count = 0
+    for user in users:
+        count = count + 1
     
-    form = SQLFORM(db.events, event)
+    form.writable = False
 
-    return dict(form=form, users=users)
+    return dict(form=form, users=users, count=count)
 
 @auth.requires_login()
 def search():
@@ -78,9 +82,10 @@ def contact():
     
 ##### Utility Functions #####    
 
+# Get the users registered for this event
 def get_users(event_id):
 
-    user_query = db.event_status.event == event_id
+    user_query = db.event_users.event == event_id
     users = db(user_query).select()
     
     return (users)

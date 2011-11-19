@@ -1,0 +1,20 @@
+(dp1
+S'output'
+p2
+S''
+sS'layer'
+p3
+S'P:\\Workbench\\DevEnv\\web2py\\applications\\init\\models\\db_fc.py'
+p4
+sS'code'
+p5
+S"# coding: utf8\n# Tables for the Fitness Challenge website\n\ndb.define_table('events',\n    Field('name', 'string'),\n    Field('description','text'),\n    Field('start_date','date'),\n    Field('end_date','date'),\n    Field('participants', 'list:reference auth_user'),\n    Field('check_in', 'string'),\n    Field('status', 'string'),\n    Field('metric_name', 'string'),\n    Field('metric_type', 'string'),\n    auth.signature,\n    format='%(name)s')\n\ndb.events.name.requires=IS_NOT_EMPTY(error_message='Enter a name for the challenge')\ndb.events.start_date.requires=IS_DATE(error_message='Enter a date in the format YYYY-MM-DD')\ndb.events.end_date.requires=IS_DATE(error_message='Enter a date in the format YYYY-MM-DD')\ndb.events.check_in.requires=IS_IN_SET(('Daily','Weekly','Monthly'))\ndb.events.status.requires=IS_EMPTY_OR(IS_IN_SET(('Pending','In-Progress','Ended')))\ndb.events.metric_name.requires=IS_NOT_EMPTY(error_message='Enter a metric name')\ndb.events.metric_type.requires=IS_IN_SET(('Repititions', 'Laps', 'Miles', 'Time', 'BMI', '% Weight Loss', 'lbs lost'), error_message='Enter a metric type')\n\ndb.define_table('event_users',\n    Field('event', 'reference events'),\n    Field('user_name', 'reference auth_user'),\n    Field('goal', 'integer'),\n#    Field('check_in', 'list:string'),\n    format='%(event_status.event)s')\n    \ndb.define_table('entries',\n    Field('event_status', 'reference event_status'),\n    Field('date_entered', 'date'),\n    Field('entry', 'double'),\n)\n\ndb.event_status.event.requires=IS_IN_DB(db, 'events.id')\n"
+p6
+sS'snapshot'
+p7
+(dp8
+sS'traceback'
+p9
+S'Traceback (most recent call last):\n  File "P:\\Workbench\\DevEnv\\web2py\\gluon\\restricted.py", line 192, in restricted\n    exec ccode in environment\n  File "P:\\Workbench\\DevEnv\\web2py\\applications\\init\\models\\db_fc.py", line 38, in <module>\n    db.event_status.event.requires=IS_IN_DB(db, \'events.id\')\n  File "P:\\Workbench\\DevEnv\\web2py\\gluon\\dal.py", line 4577, in __getattr__\n    return self[key]\n  File "P:\\Workbench\\DevEnv\\web2py\\gluon\\dal.py", line 4571, in __getitem__\n    return dict.__getitem__(self, str(key))\nKeyError: \'event_status\'\n'
+p10
+s.

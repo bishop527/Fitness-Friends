@@ -20,7 +20,7 @@
     <th>End Date</th>
     {{for event in events:}}
         <tr>        
-            <td>{{=A(event.name, _href=URL('view_challenge', vars=dict(event=event.id)))}}</td>
+            <td>{{=A(event.name, _href=URL('challenge', vars=dict(event=event.id)))}}</td>
             <td>{{=event.status}}</td>
             <td>{{=event.check_in}}</td>
             <td>{{=event.start_date}}</td>

@@ -305,6 +305,14 @@ div.post div.body-post table th {
     color:#325c05;
     background:#9ee750;
 }
+
+div.post div.body-post table.event td{
+
+    border:0px;
+    padding:2px;
+    text-align:left;
+}
+
 div.post div.body-post a {
     color:#325C05;
 }

@@ -136,3 +136,27 @@ CREATE TABLE event_status(
 success!
 timestamp: 2011-11-17T11:47:43.075000
 ALTER TABLE event_status ADD event INTEGER REFERENCES events(id) ON DELETE CASCADE;
+timestamp: 2011-11-18T19:47:35.867000
+CREATE TABLE entries(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    event_status INTEGER REFERENCES event_status(id) ON DELETE CASCADE,
+    date_entered DATE,
+    entry DOUBLE
+);
+success!
+timestamp: 2011-11-18T19:52:45.823000
+CREATE TABLE event_users(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    event INTEGER REFERENCES events(id) ON DELETE CASCADE,
+    user_name INTEGER REFERENCES auth_user(id) ON DELETE CASCADE,
+    goal INTEGER
+);
+success!
+timestamp: 2011-11-18T19:56:06.556000
+ALTER TABLE entries ADD user INTEGER REFERENCES event_users(id) ON DELETE CASCADE;
+timestamp: 2011-11-18T20:00:14.110000
+ALTER TABLE entries ADD event INTEGER REFERENCES events(id) ON DELETE CASCADE;
+timestamp: 2011-11-18T21:03:32.092000
+ALTER TABLE event_users ADD last_entry DATE;
+timestamp: 2011-11-18T21:03:32.206000
+ALTER TABLE entries ADD value DOUBLE;

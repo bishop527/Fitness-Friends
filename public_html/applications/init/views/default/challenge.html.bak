@@ -1,0 +1,46 @@
+{{extend 'UNd-template.html'}}
+{{block top_menu}}
+    <ul>
+        <li class="top-menu-item"><a href="{{=URL(r=request,f='index')}}">Home</a></li>
+        <li class="before-selected"></li>
+        <li class="selected"><a href="#">Challenge</a></li>
+        <li class="after-selected"></li>
+        <li class="top-menu-item"><a href="#">Check In</a></li>
+        <li class="top-menu-item"><a href="{{=URL(r=request,f='contact')}}">Contact</a></li>
+        <li class="top-menu-item"><a href="#">About</a></li>
+    </ul>
+{{end}}
+
+<table class='event' width="100%">
+    <tr>
+        <td width="70%" rowspan="2"><h2> {{=form.name}} </h2></td>
+        <td width="20%">Start Date: </td>
+        <td width="10%"> {{=form.start_date}}</td>
+    </tr>
+    <tr>
+        <td>End Date: </td>
+        <td> {{=form.end_date}} </td>
+    </tr>
+    <tr>
+        <td rowspan="4"><h2> {{=form.description}} </h2></td>
+        <td>Status: </td>
+        <td>{{=form.status}} </td>
+    </tr>
+    <tr>
+        <td>Check In: </td><td> {{=form.check_in}} </td>
+    </tr>
+    <tr>
+        <td>Metric Name: </td><td> {{=form.metric_name}} </td>
+    </tr>
+    <tr>
+        <td># of Partcipants: </td><td>{{=count}}</td>
+    </tr>    
+</table> 
+<hr>
+<br>
+<center><h3> Leaders Board </h3></center>
+(coming soon)
+</br>
+{{=users}}
+<br>
+<hr>
