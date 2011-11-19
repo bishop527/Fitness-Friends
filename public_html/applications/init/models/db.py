@@ -81,5 +81,5 @@ use_janrain(auth,filename='private/janrain.key')
 ## >>> for row in rows: print row.id, row.myfield
 #########################################################################
 
-db.auth_user._format = "%(first_name)s %(last_name)s"
-#db.auth_user['_format'] = "%(first_name)s %(last_name)s"
+#db.auth_user._format = "%(first_name)s %(last_name)s"
+db.auth_user['_format'] = "%(first_name)s %(last_name)s"
