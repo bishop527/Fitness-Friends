@@ -11,16 +11,23 @@
     </ul>
 {{end}}
 
+{{block header}}
+	<h1 class="titlePage">{{=form.name}} 
+	{{if auth.user.id not in form.participants:}}
+		<input type="button" name="Join" value="Join" onclick="window.location = 'join?event={{=form.id}}' " /> 
+	{{pass}}
+	</h1>
+{{end}}
+
 {{block right_menu}}
 	{{if auth.user.id == form.created_by:}}
-	        <li>{{=A('Edit Challenge', _href=URL('edit', vars=dict(event=form.id)))}}</li>
-<!--  		<li><a href="{{=URL(r=request,f='edit, vars=event=form.id')}}">Edit a Challenge</a></li>-->
+		<li>{{=A('Edit Challenge', _href=URL('edit', vars=dict(event=form.id)))}}</li>
 	{{pass}}
 {{end}}
 
 <table class='event' width="100%">
     <tr>
-        <td width="70%" rowspan="2"><h2> {{=form.name}} </h2></td>
+        <td valign="top" width="70%" rowspan="6"><h3> {{=form.description}} </h2></td>
         <td width="20%">Start Date: </td>
         <td width="10%"> {{=form.start_date}}</td>
     </tr>
@@ -29,7 +36,6 @@
         <td> {{=form.end_date}} </td>
     </tr>
     <tr>
-        <td rowspan="4"><h2> {{=form.description}} </h2></td>
         <td>Status: </td>
         <td>{{=form.status}} </td>
     </tr>
@@ -45,8 +51,7 @@
 </table> 
 <hr>
 <br>
-<center><h3> Leaders Board </h3></center>
-<h2> Under Development </h2>
+<center><h2> Leaders Board </h2></center>
 </br>
 <table>
     <th>Name</th>

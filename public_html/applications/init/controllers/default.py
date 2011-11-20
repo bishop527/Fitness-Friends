@@ -87,11 +87,23 @@ def challenge():
 
     return dict(form=form, entries=entries, num_users=num_users)
 
+# User joins an existing Challenge
+@auth.requires_login()
+def join():
+    
+    event_id=request.vars.event
+    event_update = db.events.id == event_id
+    event = db(event_update).select().first()
+    partcipants = event.participants
+    partcipants.append(auth.user.id)
+    update = db(event_update).update(participants=partcipants)
+    
+    redirect(URL('home'))
+
 @auth.requires_login()
 def search():
 
     ## get all challenges
-
     events = db(db.events).select(orderby=db.events.name)
 
     return dict(events=events)

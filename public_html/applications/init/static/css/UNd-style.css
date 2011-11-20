@@ -217,6 +217,11 @@ div.post div.head-post h1 {
     font-size:22px;
     border-bottom:1px solid #9ee750;
 }
+
+div.post div.head-post input {
+	margin-left:400px;
+}
+
 div.post div.head-post div.calendar {
     position:absolute;
     width:64px;
