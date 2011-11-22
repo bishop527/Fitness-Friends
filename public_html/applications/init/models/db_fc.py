@@ -26,17 +26,19 @@ db.events.metric_type.requires=IS_IN_SET(('Repititions', 'Laps', 'Miles', 'Time'
 
 db.define_table('event_users',
     Field('event', 'reference events'),
-    Field('user_name', 'reference auth_user'),
+    Field('user_name', 'reference auth_user'),  
     Field('goal', 'double'),
     Field('last_entry', 'date'),
 #    Field('check_in', 'list:string'),
     format = lambda row: "%s - %s" % (row.event.name,  row.user_name.first_name))
 
 db.event_users.event.requires=IS_IN_DB(db, 'events.id')
-db.event_users.user_name.requires=IS_IN_SET(db, 'events.participants')
+db.event_users.last_entry.requires=IS_EMPTY_OR(IS_DATE())
     
 db.define_table('entries',
     Field('user', 'reference event_users'),
     Field('date_entered', 'date'),
     Field('value', 'double'),
     format='%(user)s %(date_entered)s')
+
+#db.entries.user.requires=IS_IN_DB(db, 'event_users.id')

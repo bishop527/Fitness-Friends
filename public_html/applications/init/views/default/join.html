@@ -1,0 +1,42 @@
+{{extend 'UNd-template.html'}}
+{{include 'web2py_ajax.html'}} 
+{{block top_menu}}
+    <ul>
+        <li class="top-menu-item"><a href="{{=URL(r=request,f='index')}}">Home</a></li>
+        <li class="top-menu-item"><a href="#">Challenge</a></li>
+        <li class="before-selected"></li>
+        	<li class="selected"><a href="check_in">Check In</a></li>
+        <li class="after-selected"></li>        	
+        <li class="top-menu-item"><a href="{{=URL(r=request,f='contact')}}">Contact</a></li>
+        <li class="top-menu-item"><a href="{{=URL(r=request,f='about')}}">About</a></li>
+    </ul>
+{{end}}
+
+<h3>
+Before joining this Challenge take a look at the details of the Challenge below.<br>
+When ready, click the Join button below
+</h3>
+<p>
+<h3>Challenge Name: </h3>{{=form.name}}
+<br>
+<h3>Describe Your Challenge:</h3>
+{{=form.description}}
+<br><br>
+<h3>Start Date:</h3> {{=form.start_date}} 
+<h3>End Date:</h3> {{=form.end_date}}
+<br><br>
+<h3>How often should participants record their status? </h3>
+{{=form.check_in}}
+<br><br>
+<h3>Metric Name:</h3> 
+{{=form.metric_name}}
+<h3>Metric Type:</h3> 
+{{=form.metric_type}}
+<br><br>
+
+<h3> 
+Enter a personal goal you would like to achieve during this challenge.
+</h3>
+{{=event_user}}
+
+<input type="button" name="Cancel" value="Cancel" onclick="window.location = 'home.html' " /> 

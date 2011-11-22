@@ -2,11 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    {{###### include web2py specific js code (jquery, calendar, form stuff) }}
+  
+    {{#------ include web2py specific js code (jquery, calendar, form stuff) ------}}
     {{include 'web2py_ajax.html'}}
     
-    <title>Fitness Challenge    </title>
-  <link rel="stylesheet" media="screen" href="{{=URL('static', 'css/UNd-style.css')}}" />
+    <title>Fitness Challenge</title>
+  	<link rel="stylesheet" media="screen" href="{{=URL('static', 'css/UNd-style.css')}}" />
 </head>
 <body>
 
@@ -29,15 +30,19 @@
     <div id="content">
         <div class="post">
             <div class="head-post">
-            {{block header}}
-            {{end}}
-            <!-- 
-                {{if request.args(0) != None:}}
+            
+            	<!-- If logon screen -->
+            	{{if request.args(0) != None:}}
                     <h1 class="titlePage">{{=T(request.args(0).replace('_',' ').capitalize())}}</h1>
-                {{else:}}
+            	<!-- As long as its not the Challenge page -->
+                {{elif request.function != 'challenge':}}
                     <h1 class="titlePage">{{=T(request.function.replace('_',' ').capitalize())}}</h1>
+            	<!-- Challenge page has its own header -->
+                {{else:}}
+            		{{block header}}
+            		{{end}} 
                 {{pass}}
-            -->
+                
             </div>
             <div class="body-post">
                 {{include}}

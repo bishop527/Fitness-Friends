@@ -209,6 +209,25 @@ div.post {
     margin-left:30px;
     margin-bottom:60px;
 }
+
+
+div.post input {
+    padding:2px;
+    border:1px solid #325c05;
+    background:#d0ff9e;
+    color:#325c05;
+    font-weight:bold;
+    margin-left:auto;
+}
+div.post input[type=button]:hover {
+    cursor:pointer;
+    color:black;
+}
+div.post input[type=submit]:hover {
+    cursor:pointer;
+    color:black;
+}
+
 div.post div.head-post {
     position:relative;
 }
@@ -219,8 +238,18 @@ div.post div.head-post h1 {
 }
 
 div.post div.head-post input {
-	margin-left:400px;
+    padding:2px;
+    border:1px solid #325c05;
+    background:#d0ff9e;
+    color:#325c05;
+    font-weight:bold;
+    margin-left:400px;
 }
+div.post div.head-post input[type=button]:hover {
+    cursor:pointer;
+    color:black;
+}
+	
 
 div.post div.head-post div.calendar {
     position:absolute;
@@ -350,6 +379,15 @@ div.post form textarea {
     color:#325c05;
     margin-bottom:25px;
 }
+div.post form select {
+    border:1px solid #325c05;
+    border-left:3px solid #325c05;
+    padding: 3px;
+    background:#d0ff9e;
+    font-style:italic;
+    color:#325c05;
+    margin-bottom:25px;
+}
 div.post form p input[type=submit] {
     padding:5px;
     border:1px solid #325c05;
@@ -362,20 +400,31 @@ div.post form p input[type=submit]:hover {
     cursor:pointer;
     color:black;
 }
-
+div.post form p input[type=button] {
+    padding:5px;
+    border:1px solid #325c05;
+    background:#d0ff9e;
+    color:#325c05;
+    font-weight:bold;
+    margin-left:auto;
+}
+div.post form p input[type=button]:hover {
+    cursor:pointer;
+    color:black;
+}
 /* Footer styles */
 div#footer {
     width:1000px;
-    height:118px;
+    height:50px;
     background:url('../images/footer.jpg') left top no-repeat;
     margin-left:auto;
     margin-right:auto;
     text-align:center;
 }
 div#footer p {
-    padding-top:80px;
+    padding-top:10px;
     font-size:11px;
-    color:white;
+    color:#325c05;
 }
 div#footer a {
     color:#d0ff9e;

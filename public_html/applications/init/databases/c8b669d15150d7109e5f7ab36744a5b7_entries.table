@@ -27,13 +27,13 @@ p12
 ssS'event_status'
 p13
 (dp14
-S'type'
+S'sortable'
 p15
-S'reference event_status'
-p16
-sS'sortable'
-p17
 I2
+sS'type'
+p16
+S'reference event_status'
+p17
 sS'sql'
 p18
 S'INTEGER REFERENCES event_status(id) ON DELETE CASCADE'
@@ -41,13 +41,13 @@ p19
 ssS'entry'
 p20
 (dp21
-S'sortable'
+S'type'
 p22
-I5
-sS'type'
-p23
 S'double'
+p23
+sS'sortable'
 p24
+I5
 sS'sql'
 p25
 S'DOUBLE'
@@ -78,10 +78,10 @@ ssS'event'
 p35
 (dp36
 g22
-I3
-sg23
 S'reference events'
 p37
+sg24
+I3
 sg25
 S'INTEGER REFERENCES events(id) ON DELETE CASCADE'
 p38

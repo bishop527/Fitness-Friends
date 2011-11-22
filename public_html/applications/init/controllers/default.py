@@ -77,12 +77,21 @@ def challenge():
     event_id= request.vars.event
     event_query = db.events.id == event_id
     form= db(event_query).select().first()
+    users = db(db.event_users.event == event_id).select()
     
-    # Get the registered users
-    entries_query = db.event_users.event == event_id
-    entries = db(entries_query).select(db.entries.ALL, groupby=db.entries.user)
+    # Get the registered users for this event
 
-    num_users = len(entries)        
+    # a bunch of selects used while testing the leaders board
+    # keeping them here for reference for now
+#    entries = db().select(db.entries.user, distinct=True)
+#    entries = db(db.event_users.event==event_id).select(db.event_users.event)
+#    entries = db(db.event_users.event==event_id).select(db.event_users.event, db.event_users.user_name)
+#    entries = db(db.event_users.event==event_id).select()      
+    
+    entries = db(db.entries.user.belongs(db(db.event_users.event==event_id).select())).\
+        select(groupby=db.entries.user, orderby=~db.entries.value)
+
+    num_users = len(users)        
     form.writable = False
 
     return dict(form=form, entries=entries, num_users=num_users)
@@ -90,15 +99,71 @@ def challenge():
 # User joins an existing Challenge
 @auth.requires_login()
 def join():
+ 
+    event_id = request.vars.event
+    user = auth.user.id
+    goal = '0'
     
-    event_id=request.vars.event
+    # add this user to the event_users table
+    db.event_users.insert(event=event_id, user_name=user, goal=goal)
+ 
+    # update the event participants list with this user
     event_update = db.events.id == event_id
     event = db(event_update).select().first()
     partcipants = event.participants
     partcipants.append(auth.user.id)
     update = db(event_update).update(participants=partcipants)
-    
+        
     redirect(URL('home'))
+ 
+# User can see their entries and make a new entry
+@auth.requires_login()
+def check_in():
+    import time
+    from datetime import date
+
+    event_id = request.vars.event
+    entries = db(db.entries.user.belongs(db((db.event_users.event==event_id) & (db.event_users.user_name==auth.user.id)).select())).\
+        select(orderby=db.entries.user)
+    
+    # get event specific data
+    event_query = db.events.id == event_id
+    event = db(event_query).select().first()
+    metric_name = event.metric_name
+    metric_type = event.metric_type
+    
+    # get data
+    event_users = db((db.event_users.event==event_id) & (db.event_users.user_name==auth.user.id)).select(groupby=db.event_users.user_name).first()
+    user = event_users.id
+    
+    # check if there's already been an entry today
+    # TODO - this should check the check-in frequency field to see when a user is allowed to check-in
+    entry = db((db.entries.user == user) & (db.entries.date_entered == date.today())).select().first()
+    exists = False
+    if entry is None:
+        id = db.entries.insert(user=user, date_entered=date.today())                 
+        entry = db(db.entries.id == id).select().first()
+    elif entry.value is not None:
+        exists = True
+        
+    db.entries.user.writable = False
+    db.entries.date_entered.writable = False
+    
+    # already submitted an entry for today
+    if exists:
+        db.entries.value.writable = False
+        
+    form = SQLFORM(db.entries, entry)
+
+    if form.process().accepted:
+        response.flash = 'form accepted'
+        redirect(URL('home'))
+    elif form.errors:
+        response.flash = 'form has errors'
+    else:
+        response.flash = 'please fill the form'
+
+    return dict(entries=entries, metric_name=metric_name, form=form)
 
 @auth.requires_login()
 def search():
@@ -108,8 +173,14 @@ def search():
 
     return dict(events=events)
         
+# display the contact page        
 def contact():
 
+    return dict()
+
+# display the about page
+def about():
+    
     return dict()
     
 ##### Utility Functions #####    

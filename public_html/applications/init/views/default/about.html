@@ -1,0 +1,28 @@
+{{extend 'UNd-template.html'}}
+{{include 'web2py_ajax.html'}} 
+{{block top_menu}}
+    <ul>
+        <li class="top-menu-item"><a href="{{=URL(r=request,f='index')}}">Home</a></li>
+        <li class="top-menu-item"><a href="#">Challenge</a></li>
+        <li class="top-menu-item"><a href="{{=URL(r=request,f='contact')}}">Contact</a></li>
+        <li class="before-selected"></li>
+        <li class="selected"><a href="#">About</a></li>
+        <li class="after-selected"></li>
+    </ul>
+{{end}}
+
+<br>
+<h2>
+Welcome to Fitness Challenge!
+</h2>
+<br>
+<h3>
+Fitness Challenge is an online community where participants unite for the common goal of wellness. 
+<br><br>
+Using competition and comradery as driving forces, members set personal fitness goals while utilizing
+the support and inspiration that flourishes in community settings.
+<br><br>
+Fitness Challenge is free to use and, while competitive in nature, the Challenges are intended as a 
+fun way to encourage healthy activity.
+
+</h3>

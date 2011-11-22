@@ -1,0 +1,47 @@
+{{extend 'UNd-template.html'}}
+{{include 'web2py_ajax.html'}} 
+{{block top_menu}}
+    <ul>
+        <li class="top-menu-item"><a href="{{=URL(r=request,f='index')}}">Home</a></li>
+        <li class="top-menu-item"><a href="{{=URL(r=request,f='search')}}">Challenges</a></li>
+        <li class="before-selected"></li>
+        	<li class="selected"><a href="check_in">Check In</a></li>
+        <li class="after-selected"></li>        	
+        <li class="top-menu-item"><a href="{{=URL(r=request,f='contact')}}">Contact</a></li>
+        <li class="top-menu-item"><a href="{{=URL(r=request,f='about')}}">About</a></li>
+    </ul>
+{{end}}
+<br>
+<center><h3> Entries Made</h3></center>
+<table>
+	<th>Name</th>
+	<th>Entry</th>
+   	<th>Date Entered</th>
+
+{{for entry in entries:}}
+        <tr>        
+            <td>{{=entry.user.user_name.first_name}}</td>
+            <td>{{=entry.value}}</td>
+            <td>{{=entry.date_entered}}</td>
+        </tr>
+{{pass}}
+
+<!-- add a blank row if the table is empty-->
+{{if len(entries) == 2:}}
+
+    	    <tr>        
+        	    <td> </td>
+	            <td> </td>
+            	<td> </td>
+        	</tr>
+{{pass}}
+</table>
+<br>
+<hr>
+<p>
+{{=form.custom.begin}}
+<center> <h3> Submit your entry: {{=form.custom.widget.value}} &nbsp&nbsp&nbsp {{=metric_name}} </h3>
+<br>
+{{=form.custom.submit}}
+<input type="button" name="Cancel" value="Cancel" onclick="window.location = 'home.html' " /> </center>
+{{=form.custom.end}}

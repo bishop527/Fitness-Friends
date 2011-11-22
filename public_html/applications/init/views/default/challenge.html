@@ -1,20 +1,26 @@
 {{extend 'UNd-template.html'}}
+{{include 'web2py_ajax.html'}} 
 {{block top_menu}}
     <ul>
         <li class="top-menu-item"><a href="{{=URL(r=request,f='index')}}">Home</a></li>
         <li class="before-selected"></li>
         <li class="selected"><a href="#">Challenge</a></li>
         <li class="after-selected"></li>
-        <li class="top-menu-item"><a href="#">Check In</a></li>
+        {{if auth.user.id in form.participants:}}
+        	<li class="top-menu-item"><a href="{{=URL(r=request,f='check_in', vars=dict(event=form.id))}}">Check In</a></li>
+		{{pass}}        	
         <li class="top-menu-item"><a href="{{=URL(r=request,f='contact')}}">Contact</a></li>
-        <li class="top-menu-item"><a href="#">About</a></li>
+        <li class="top-menu-item"><a href="{{=URL(r=request,f='about')}}">About</a></li>
     </ul>
 {{end}}
 
 {{block header}}
 	<h1 class="titlePage">{{=form.name}} 
 	{{if auth.user.id not in form.participants:}}
-		<input type="button" name="Join" value="Join" onclick="window.location = 'join?event={{=form.id}}' " /> 
+	<!-- Would prefer to use this ajax enabled button, but it doesn't work right. It calls the join function, but doesn't redirect to home
+		<input type="button" name="Join" value="Join" onclick="ajax('{{=URL(r=request,f='join', vars=dict(event=form.id))}}',[],'');" />
+	-->
+ 		<input type="button" name="Join" value="Join" onclick="window.location = 'join?event={{=form.id}}' " /> 
 	{{pass}}
 	</h1>
 {{end}}
@@ -64,6 +70,8 @@
             <td>{{=entry.date_entered}}</td>
         </tr>
     {{pass}}
+    
+    
 </table>
 
 <br>
