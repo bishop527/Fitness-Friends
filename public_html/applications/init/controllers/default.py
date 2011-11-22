@@ -157,7 +157,7 @@ def check_in():
 
     if form.process().accepted:
         response.flash = 'form accepted'
-        redirect(URL('home'))
+        redirect(URL(r=request, f='challenge', vars=dict(event=event.id)))
     elif form.errors:
         response.flash = 'form has errors'
     else:
