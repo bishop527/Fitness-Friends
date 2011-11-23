@@ -58,6 +58,8 @@ def edit():
     event_id= request.vars.event
     event_query = db.events.id == event_id
     event = db(event_query).select().first()
+    db.events.participants.writable = False
+    
     form= SQLFORM(db.events, event)
     
     if form.process(session=None, onvalidation=date_compare, formname='edit').accepted:
@@ -89,7 +91,7 @@ def challenge():
 #    entries = db(db.event_users.event==event_id).select()      
     
     entries = db(db.entries.user.belongs(db(db.event_users.event==event_id).select())).\
-        select(groupby=db.entries.user, orderby=~db.entries.value)
+        select(groupby=db.entries.user, orderby=~db.entries.date_entered)
 
     num_users = len(users)        
     form.writable = False
@@ -123,46 +125,56 @@ def check_in():
     from datetime import date
 
     event_id = request.vars.event
-    entries = db(db.entries.user.belongs(db((db.event_users.event==event_id) & (db.event_users.user_name==auth.user.id)).select())).\
-        select(orderby=db.entries.user)
     
-    # get event specific data
-    event_query = db.events.id == event_id
-    event = db(event_query).select().first()
+    # Get data for this Event
+    event = __get_event(event_id)
     metric_name = event.metric_name
     metric_type = event.metric_type
     
-    # get data
-    event_users = db((db.event_users.event==event_id) & (db.event_users.user_name==auth.user.id)).select(groupby=db.event_users.user_name).first()
+    # Get this users entries for this event
+    entries = __get_entries(event_id)
+    
+    # Get users registered for this Event
+    event_users = __get_event_users(event_id)
     user = event_users.id
     
-    # check if there's already been an entry today
-    # TODO - this should check the check-in frequency field to see when a user is allowed to check-in
-    entry = db((db.entries.user == user) & (db.entries.date_entered == date.today())).select().first()
-    exists = False
-    if entry is None:
-        id = db.entries.insert(user=user, date_entered=date.today())                 
-        entry = db(db.entries.id == id).select().first()
-    elif entry.value is not None:
-        exists = True
-        
-    db.entries.user.writable = False
-    db.entries.date_entered.writable = False
+    # Check frequency
+    freq_result, err_msg = __check_frequency(event)
     
-    # already submitted an entry for today
-    if exists:
-        db.entries.value.writable = False
+    # Check the date range of the event
+    if __check_date_range(event):
+        # Check the frequency range 
+        if freq_result:
+            # check if there's already been an entry today
+            # TODO - this should check the check-in frequency field to see when a user is allowed to check-in
+            entry = db((db.entries.user == user) & (db.entries.date_entered == date.today())).select().first()
         
-    form = SQLFORM(db.entries, entry)
-
-    if form.process().accepted:
-        response.flash = 'form accepted'
-        redirect(URL(r=request, f='challenge', vars=dict(event=event.id)))
-    elif form.errors:
-        response.flash = 'form has errors'
+            if entry is None:
+                id = db.entries.insert(user=user, date_entered=date.today())                 
+                entry = db(db.entries.id == id).select().first()
+                exists = False
+            elif entry.value is not None:
+                exists = True
+        
+            db.entries.user.writable = False
+            db.entries.date_entered.writable = False
+    
+            form = SQLFORM(db.entries, entry)
+            if form.process().accepted:
+                response.flash = 'form accepted'
+                redirect(URL(r=request, f='challenge', vars=dict(event=event.id)))
+            elif form.errors:
+                response.flash = 'form has errors'
+            else:
+                response.flash = 'please fill the form'
+    
+        # Out of freq range so send the error message
+        else:
+            form = err_msg
+    # Out of date range so send error message
     else:
-        response.flash = 'please fill the form'
-
+        form = "This Challenge is not currently active. You can not submit any entries"
+        
     return dict(entries=entries, metric_name=metric_name, form=form)
 
 @auth.requires_login()
@@ -185,6 +197,61 @@ def about():
     
 ##### Utility Functions #####    
 
+# Check the 
+def __check_frequency(event):
+    import time
+    from datetime import date
+    
+    date_entered = date.today()
+    start_date = event.start_date
+    todays_date = date.today()
+    timedelta = todays_date.day - start_date.day
+    
+    frequency = event.frequency
+    
+    if frequency == "Daily": 
+        if timedelta % 1 == 0:
+            return(True, "")
+        else:
+            remainder = timedelta % 1
+            return(False, "It is not time to check-in yet. Check back in " + str(remainder) + " day")
+    if frequency == "Weekly":
+        if timedelta % 7 == 0:
+            return(True, "")
+        else:
+            remainder = timedelta % 7
+            return(False, "It is not time to check-in yet. Check back in " + str(remainder) + " days")
+        
+    # need to figure out a better way to hanldle months
+    if frequency == "Monthly":
+        if timedelta % 30 == 0:
+            return(True, "")
+        else:
+            remainder = timedelta % 30
+            return(False, "It is not time to check-in yet. Check back in " + str(remainder) + " days")
+
+    if frequency == "1 Day":
+        if timedelta % 1 == 0:
+            return(True, "")
+        else:
+            # this should never happen
+            remainder = timedelta % 1
+            return(False, "It is not time to check-in yet. Check back in " + str(remainder) + " day")
+
+# check if today is in between the start and end date of the challenge 
+def __check_date_range(event):
+    import time
+    from datetime import date
+    
+    start_date = event.start_date
+    end_date = event.end_date
+    result = False
+    if date.today() >= start_date:
+        if date.today() <= end_date:
+            result = True
+        
+    return(result)
+        
 # Get the users registered for this event
 def get_users(event_id):
 
@@ -193,12 +260,24 @@ def get_users(event_id):
             
     return (users)
     
-def get_entries(user):
+# Get this users entries for the given event
+def __get_entries(event_id):
     
-    entry_query = db.entries.user == user
-    entry = db(entry_query).select(orderby=db.entries.date_entered).last()
+    return(db(db.entries.user.belongs(db((db.event_users.event==event_id) & (db.event_users.user_name==auth.user.id)).select())).\
+        select(orderby=db.entries.date_entered))
 
-    return (entry)    
+# Get event users
+def __get_event_users(event_id):
+    
+    return(db((db.event_users.event==event_id) & (db.event_users.user_name==auth.user.id)).select(groupby=db.event_users.user_name).first())
+
+    
+# Get event data for selected event
+def __get_event(event_id):
+    
+    event_query = db.events.id == event_id
+    return (db(event_query).select().first())
+    
 
 # Make sure Start Date is less then End Date
 def date_compare(form):

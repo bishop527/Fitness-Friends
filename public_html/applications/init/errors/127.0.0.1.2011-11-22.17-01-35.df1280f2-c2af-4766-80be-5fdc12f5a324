@@ -1,0 +1,21 @@
+(dp1
+S'output'
+p2
+S"<type 'exceptions.KeyError'> 'check_in'"
+p3
+sS'layer'
+p4
+S'P:\\School\\DePaul\\Projects\\CSC_438\\web2py\\applications\\init\\models\\db_fc.py'
+p5
+sS'code'
+p6
+S'# coding: utf8\n# Tables for the Fitness Challenge website\n\ndb.define_table(\'events\',\n    Field(\'name\', \'string\'),\n    Field(\'description\',\'text\'),\n    Field(\'start_date\',\'date\'),\n    Field(\'end_date\',\'date\'),\n    Field(\'participants\', \'list:reference auth_user\'),\n    Field(\'frequency\', \'string\'),\n    Field(\'status\', \'string\'),\n    Field(\'metric_name\', \'string\'),\n    Field(\'metric_type\', \'string\'),\n    auth.signature,\n    format=\'%(name)s\')\n\ndb.events.name.requires=IS_NOT_EMPTY(error_message=\'Enter a name for the challenge\')\ndb.events.start_date.requires=IS_DATE(error_message=\'Enter a date in the format YYYY-MM-DD\')\ndb.events.end_date.requires=IS_DATE(error_message=\'Enter a date in the format YYYY-MM-DD\')\ndb.events.check_in.requires=IS_IN_SET((\'1 Day\', \'Daily\',\'Weekly\',\'Monthly\'))\ndb.events.status.requires=IS_EMPTY_OR(IS_IN_SET((\'Pending\',\'In-Progress\',\'Ended\')))\ndb.events.metric_name.requires=IS_NOT_EMPTY(error_message=\'Enter a metric name\')\ndb.events.metric_type.requires=IS_IN_SET((\'Repititions\', \'Laps\', \'Miles\', \'Time\', \'BMI\', \n                                          \'% Weight Loss\', \'lbs lost\', \'Steps\'),\n                                          error_message=\'Enter a metric type\')\n\ndb.define_table(\'event_users\',\n    Field(\'event\', \'reference events\'),\n    Field(\'user_name\', \'reference auth_user\'),  \n    Field(\'goal\', \'double\'),\n    Field(\'last_entry\', \'date\'),\n#    Field(\'check_in\', \'list:string\'),\n    format = lambda row: "%s - %s" % (row.event.name,  row.user_name.first_name))\n\ndb.event_users.event.requires=IS_IN_DB(db, \'events.id\')\ndb.event_users.last_entry.requires=IS_EMPTY_OR(IS_DATE())\n    \ndb.define_table(\'entries\',\n    Field(\'user\', \'reference event_users\'),\n    Field(\'date_entered\', \'date\'),\n    Field(\'value\', \'double\'),\n    format=\'%(user)s %(date_entered)s\')\n\n#db.entries.user.requires=IS_IN_DB(db, \'event_users.id\')'
+p7
+sS'snapshot'
+p8
+(dp9
+sS'traceback'
+p10
+S'Traceback (most recent call last):\n  File "P:\\School\\DePaul\\Projects\\CSC_438\\web2py\\gluon\\restricted.py", line 204, in restricted\n    exec ccode in environment\n  File "P:\\School\\DePaul\\Projects\\CSC_438\\web2py\\applications\\init\\models\\db_fc.py", line 20, in <module>\n    db.events.check_in.requires=IS_IN_SET((\'1 Day\', \'Daily\',\'Weekly\',\'Monthly\'))\n  File "P:\\School\\DePaul\\Projects\\CSC_438\\web2py\\gluon\\dal.py", line 5006, in __getattr__\n    return self[key]\n  File "P:\\School\\DePaul\\Projects\\CSC_438\\web2py\\gluon\\dal.py", line 4946, in __getitem__\n    return dict.__getitem__(self, str(key))\nKeyError: \'check_in\'\n'
+p11
+s.

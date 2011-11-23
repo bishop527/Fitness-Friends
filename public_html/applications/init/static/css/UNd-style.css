@@ -388,13 +388,15 @@ div.post form select {
     color:#325c05;
     margin-bottom:25px;
 }
+
+
 div.post form p input[type=submit] {
     padding:5px;
     border:1px solid #325c05;
     background:#d0ff9e;
     color:#325c05;
     font-weight:bold;
-    margin-left:350px;
+    margin-left:70px;
 }
 div.post form p input[type=submit]:hover {
     cursor:pointer;

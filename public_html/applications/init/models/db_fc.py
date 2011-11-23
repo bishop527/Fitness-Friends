@@ -7,7 +7,7 @@ db.define_table('events',
     Field('start_date','date'),
     Field('end_date','date'),
     Field('participants', 'list:reference auth_user'),
-    Field('check_in', 'string'),
+    Field('frequency', 'string'),
     Field('status', 'string'),
     Field('metric_name', 'string'),
     Field('metric_type', 'string'),
@@ -17,7 +17,7 @@ db.define_table('events',
 db.events.name.requires=IS_NOT_EMPTY(error_message='Enter a name for the challenge')
 db.events.start_date.requires=IS_DATE(error_message='Enter a date in the format YYYY-MM-DD')
 db.events.end_date.requires=IS_DATE(error_message='Enter a date in the format YYYY-MM-DD')
-db.events.check_in.requires=IS_IN_SET(('1 Day', 'Daily','Weekly','Monthly'))
+db.events.frequency.requires=IS_IN_SET(('1 Day', 'Daily','Weekly','Monthly'))
 db.events.status.requires=IS_EMPTY_OR(IS_IN_SET(('Pending','In-Progress','Ended')))
 db.events.metric_name.requires=IS_NOT_EMPTY(error_message='Enter a metric name')
 db.events.metric_type.requires=IS_IN_SET(('Repititions', 'Laps', 'Miles', 'Time', 'BMI', 
@@ -29,7 +29,7 @@ db.define_table('event_users',
     Field('user_name', 'reference auth_user'),  
     Field('goal', 'double'),
     Field('last_entry', 'date'),
-#    Field('check_in', 'list:string'),
+#    Field('frequency', 'list:string'),
     format = lambda row: "%s - %s" % (row.event.name,  row.user_name.first_name))
 
 db.event_users.event.requires=IS_IN_DB(db, 'events.id')

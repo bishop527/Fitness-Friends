@@ -35,22 +35,44 @@
 {{pass}}
 
 {{if request.args(0)=='login':}}
-    {{=form.custom.begin}}
-    <p>
-    <center> <h3>E-Mail: {{=form.custom.widget.email}}</h3>
-    <p>
-    <h3>Password: {{=form.custom.widget.password}}</h3>
-    <p>
-    {{=form.custom.submit}}    
-    {{=form.custom.end}} 
-    {{if not 'register' in auth.settings.actions_disabled:}}
-        <br/>
-        <h3><a href="{{=URL(r=request,args='register')}}">register for free </a></h3>
-    {{pass}}
-    {{if not 'request_reset_password' in auth.settings.actions_disabled:}}
-        <h3><a href="{{=URL(r=request,args='request_reset_password')}}">  forgot password?</a></h3>
-    {{pass}}
-    {{pass}}
+	<table width="100%">
+    	<tr>
+    		<td>
+    			<h2>
+				Welcome to Fitness Challenge!
+				</h2>
+				<br>
+				<h3>
+				Fitness Challenge is an online community where participants unite for the common goal of wellness. 
+				<br><br>
+				Using competition and comradery as driving forces, members set personal fitness goals while utilizing
+				the support and inspiration that flourishes in community settings.
+				<br><br>
+				Fitness Challenge is free to use and, while competitive in nature, the Challenges are intended as a 
+				fun way to encourage healthy activity.
+				</h3> 
+    		</td>
+    		<td>
+			    {{=form.custom.begin}}
+			    	<p>
+			    	<center> <h3>E-Mail: {{=form.custom.widget.email}}</h3>
+			    	<p>
+			    	<h3>Password: {{=form.custom.widget.password}}</h3>
+			    	<p>
+			    	{{=form.custom.submit}}
+			    	</center>    
+			    {{=form.custom.end}} 
+			    {{if not 'register' in auth.settings.actions_disabled:}}
+			        <br/>
+			        <h3><a href="{{=URL(r=request,args='register')}}">register for free </a></h3>
+			    {{pass}}
+			    {{if not 'request_reset_password' in auth.settings.actions_disabled:}}
+			        <h3><a href="{{=URL(r=request,args='request_reset_password')}}">  forgot password?</a></h3>
+			    {{pass}}
+			    {{pass}}
+			 </td>
+		</tr>
+	</table>
 {{pass}}
 
 {{if request.args(0)=='profile':}}

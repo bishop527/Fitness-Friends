@@ -46,7 +46,7 @@
         <td>{{=form.status}} </td>
     </tr>
     <tr>
-        <td>Check In: </td><td> {{=form.check_in}} </td>
+        <td>Check In Frequency: </td><td> {{=form.frequency}} </td>
     </tr>
     <tr>
         <td>Metric Name: </td><td> {{=form.metric_name}} </td>
@@ -60,16 +60,30 @@
 <center><h2> Leaders Board </h2></center>
 </br>
 <table>
+	<th>Rank</th>
     <th>Name</th>
     <th>Entry</th>
     <th>Date of Last Entry</th>
-	{{for entry in entries:}}    
-        <tr>        
+    	{{rank = 0}}
+	{{for entry in entries.sort(lambda entry: entry.value, reverse=True):}}
+		{{rank = rank + 1}}    
+        <tr>     
+        	<td>{{=rank}}</td>   
             <td>{{=entry.user.user_name.first_name}}</td>
             <td>{{=entry.value}}</td>
             <td>{{=entry.date_entered}}</td>
         </tr>
     {{pass}}
+    
+    <!-- add a blank row if the table is empty-->
+	{{if len(entries) == 0:}}
+    	    <tr>        
+        	    <td> </td>
+	            <td> </td>
+	            <td> </td>
+            	<td> </td>
+        	</tr>
+{{pass}}
     
     
 </table>

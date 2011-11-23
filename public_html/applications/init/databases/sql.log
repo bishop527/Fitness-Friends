@@ -175,3 +175,5 @@ CREATE TABLE event_entries(
     modified_by INTEGER REFERENCES auth_user(id) ON DELETE CASCADE
 );
 success!
+timestamp: 2011-11-22T17:01:35.610000
+ALTER TABLE events ADD frequency CHAR(512);

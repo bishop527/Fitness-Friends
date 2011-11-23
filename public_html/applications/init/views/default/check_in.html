@@ -27,7 +27,7 @@
 {{pass}}
 
 <!-- add a blank row if the table is empty-->
-{{if len(entries) == 2:}}
+{{if len(entries) == 0:}}
 
     	    <tr>        
         	    <td> </td>
@@ -39,9 +39,15 @@
 <br>
 <hr>
 <p>
-{{=form.custom.begin}}
-<center> <h3> Submit your entry: {{=form.custom.widget.value}} &nbsp&nbsp&nbsp {{=metric_name}} </h3>
-<br>
-{{=form.custom.submit}}
-<input type="button" name="Cancel" value="Cancel" onclick="window.location = 'home.html' " /> </center>
-{{=form.custom.end}}
+{{if type(form) is SQLFORM:}}
+	{{=form.custom.begin}}
+		<center> <h3> How many {{=metric_name.lower()}} did you do? {{=form.custom.widget.value}}</h3>
+		<br>
+		{{=form.custom.submit}}
+		<input type="button" name="Cancel" value="Cancel" onclick="window.location = 'home.html' " /> </center>
+	{{=form.custom.end}}
+{{else:}}
+	<center><h3>{{=form}}</h3>
+	<br>
+	<input type="button" name="Cancel" value="Cancel" onclick="window.location = 'home.html' " /> </center>
+{{pass}}
