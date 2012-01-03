@@ -123,7 +123,7 @@ def join():
 def check_in():
     import time
     from datetime import date
-
+    
     event_id = request.vars.event
     
     # Get data for this Event
@@ -146,7 +146,6 @@ def check_in():
         # Check the frequency range 
         if freq_result:
             # check if there's already been an entry today
-            # TODO - this should check the check-in frequency field to see when a user is allowed to check-in
             entry = db((db.entries.user == user) & (db.entries.date_entered == date.today())).select().first()
         
             if entry is None:
@@ -160,7 +159,14 @@ def check_in():
             db.entries.date_entered.writable = False
     
             form = SQLFORM(db.entries, entry)
+            
             if form.process().accepted:
+                if metric_type == '% Weight Loss':
+                    percentage = __calculate_perc_weight_loss(request.vars.value)
+                    entry.update_record(value=percentage)
+                if metric_type == 'BMI':
+                    bmi = __calculate_BMI(request.vars.value)
+                    entry.update_record(value=bmi)
                 response.flash = 'form accepted'
                 redirect(URL(r=request, f='challenge', vars=dict(event=event.id)))
             elif form.errors:
@@ -168,7 +174,7 @@ def check_in():
             else:
                 response.flash = 'please fill the form'
     
-        # Out of freq range so send the error message
+        # Out of frequency range, send the error message
         else:
             form = err_msg
     # Out of date range so send error message
@@ -197,7 +203,31 @@ def about():
     
 ##### Utility Functions #####    
 
-# Check the 
+# Calculate % Weight Loss
+def __calculate_perc_weight_loss(entry):
+    import math
+    current_weight = eval(entry)
+    start_weight = auth.user.starting_weight
+    
+    #calculate the absolute value of percentage weight loss
+    percent = math.fabs(((current_weight - start_weight)/start_weight)*100)
+    
+    return(round(percent,1))
+
+# Calculate BMI value
+def __calculate_BMI(entry):
+    height = int(auth.user.height)
+    
+    if entry != None:
+        weight = eval(entry)
+    else:
+        weight = 0
+        
+    bmi = weight/(height*height)*703
+    
+    return(round(bmi,1))
+
+# Check the frequency
 def __check_frequency(event):
     import time
     from datetime import date
@@ -222,7 +252,7 @@ def __check_frequency(event):
             remainder = timedelta % 7
             return(False, "It is not time to check-in yet. Check back in " + str(remainder) + " days")
         
-    # need to figure out a better way to hanldle months
+    # need to figure out a better way to handle months
     if frequency == "Monthly":
         if timedelta % 30 == 0:
             return(True, "")
@@ -230,7 +260,7 @@ def __check_frequency(event):
             remainder = timedelta % 30
             return(False, "It is not time to check-in yet. Check back in " + str(remainder) + " days")
 
-    if frequency == "1 Day":
+    if frequency == "Single Day":
         if timedelta % 1 == 0:
             return(True, "")
         else:

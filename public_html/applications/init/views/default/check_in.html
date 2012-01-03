@@ -41,7 +41,7 @@
 <p>
 {{if type(form) is SQLFORM:}}
 	{{=form.custom.begin}}
-		<center> <h3> How many {{=metric_name.lower()}} did you do? {{=form.custom.widget.value}}</h3>
+		<center> <h3> Submit your entry: {{=form.custom.widget.value}}</h3>
 		<br>
 		{{=form.custom.submit}}
 		<input type="button" name="Cancel" value="Cancel" onclick="window.location = 'home.html' " /> </center>

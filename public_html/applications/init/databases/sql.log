@@ -177,3 +177,5 @@ CREATE TABLE event_entries(
 success!
 timestamp: 2011-11-22T17:01:35.610000
 ALTER TABLE events ADD frequency CHAR(512);
+timestamp: 2012-01-02T21:29:48.517000
+ALTER TABLE auth_user ADD starting_weight DOUBLE;

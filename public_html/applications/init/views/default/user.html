@@ -20,6 +20,7 @@
     <h3>E-Mail: {{=form.custom.widget.email}}</h3>
     <p>
     <h3>Password: {{=form.custom.widget.password}}</h3>
+    <p>
     <h3>Verify Password: {{=form.custom.widget.password_two}}</h3>
     <p>
     <h3>Gender</h3>
@@ -27,7 +28,7 @@
     <p>
     <h3>Birthday: {{=form.custom.widget.birthday}}</h3>
     <p>
-    <h3>Height (inches): {{=form.custom.widget.height}} Current Weight (lbs): {{=form.custom.widget.current_weight}}</h3>
+    <h3>Height (inches): {{=form.custom.widget.height}} Current Weight (lbs): {{=form.custom.widget.starting_weight}}</h3>
     <br/>
     
     {{=form.custom.submit}}
@@ -92,8 +93,8 @@
         <br>
     <h3>Height (inches): {{=form.custom.widget.height}}</h3>
         <br>
-    <h3>Current Weight (lbs): {{=form.custom.widget.current_weight}}</h3>
-    <br/>
+    <h3>Starting Weight (lbs): {{=form.custom.widget.starting_weight}}</h3>
+    	<br>
     
     {{=form.custom.submit}}
     <input type="button" name="Cancel" value="Cancel" onclick="window.location = '../home.html' " /> 

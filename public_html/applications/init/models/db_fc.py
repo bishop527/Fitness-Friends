@@ -17,10 +17,10 @@ db.define_table('events',
 db.events.name.requires=IS_NOT_EMPTY(error_message='Enter a name for the challenge')
 db.events.start_date.requires=IS_DATE(error_message='Enter a date in the format YYYY-MM-DD')
 db.events.end_date.requires=IS_DATE(error_message='Enter a date in the format YYYY-MM-DD')
-db.events.frequency.requires=IS_IN_SET(('1 Day', 'Daily','Weekly','Monthly'))
+db.events.frequency.requires=IS_IN_SET(('Single Day', 'Daily','Weekly','Monthly'))
 db.events.status.requires=IS_EMPTY_OR(IS_IN_SET(('Pending','In-Progress','Ended')))
 db.events.metric_name.requires=IS_NOT_EMPTY(error_message='Enter a metric name')
-db.events.metric_type.requires=IS_IN_SET(('Repititions', 'Laps', 'Miles', 'Time', 'BMI', 
+db.events.metric_type.requires=IS_IN_SET(('Repetitions', 'Laps', 'Miles', 'Time', 'BMI', 
                                           '% Weight Loss', 'lbs lost', 'Steps'),
                                           error_message='Enter a metric type')
 
